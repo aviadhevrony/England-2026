@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation · England 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d5a3d;
+    --green-light: #4a8c5c;
+    --green-pale: #c8dfc8;
+    --cream: #f5f0e8;
+    --cream-dark: #e8e0d0;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --blue: #1a5fa8;
+    --blue-light: #e8f0fb;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --text-light: #888;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text-dark); font-size: 15px; line-height: 1.7; }
+
+  /* HEADER */
+  .header {
+    background: var(--green-deep);
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .header-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--green-pale); text-decoration: none; font-size: 13px;
+    font-weight: 500; margin-bottom: 24px; opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .header-back:hover { opacity: 1; }
+  .header-eyebrow { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; font-weight: 500; }
+  .header-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 12px; }
+  .header-title em { font-style: italic; color: var(--gold-light); }
+  .header-sub { color: var(--green-pale); font-size: 15px; opacity: 0.85; max-width: 520px; margin: 0 auto; }
+
+  /* NAV */
+  .toc {
+    background: #fff;
+    border-bottom: 1px solid var(--cream-dark);
+    position: sticky; top: 0; z-index: 50;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .toc::-webkit-scrollbar { display: none; }
+  .toc-inner { display: flex; white-space: nowrap; padding: 0 16px; min-width: max-content; }
+  .toc-inner a { display: inline-block; padding: 13px 14px; font-size: 12px; font-weight: 500; color: var(--text-mid); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .toc-inner a:hover { color: var(--green-deep); border-bottom-color: var(--green-light); }
+
+  /* LAYOUT */
+  .page { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  /* SECTION HEADINGS */
+  .doc-section { margin-bottom: 56px; }
+  .section-num { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green-light); margin-bottom: 6px; }
+  .section-heading { font-family: var(--font-display); font-size: clamp(24px, 3vw, 32px); font-weight: 700; color: var(--green-deep); margin-bottom: 20px; line-height: 1.2; }
+  .section-heading em { font-style: italic; color: var(--green-light); }
+  .section-intro { color: var(--text-mid); margin-bottom: 24px; font-size: 15px; }
+
+  /* STEPS */
+  .steps { list-style: none; counter-reset: step; }
+  .steps li { counter-increment: step; display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+  .steps li::before {
+    content: counter(step);
+    background: var(--green-deep); color: #fff;
+    font-size: 12px; font-weight: 600;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+    font-family: var(--font-body);
+  }
+  .steps li strong { color: var(--text-dark); }
+  .steps li .note { font-size: 13px; color: var(--text-light); margin-top: 3px; }
+
+  /* CODE / INLINE CODE */
+  code {
+    font-family: var(--font-mono);
+    background: var(--cream-dark);
+    color: var(--green-deep);
+    padding: 2px 7px; border-radius: 4px;
+    font-size: 13px;
+  }
+  pre {
+    background: var(--green-deep);
+    color: var(--green-pale);
+    border-radius: 10px;
+    padding: 20px 22px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre .comment { color: #6a9a7a; }
+  pre .key { color: var(--gold-light); }
+  pre .val { color: #a8d8a8; }
+
+  /* CARDS */
+  .card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .card-title { font-weight: 600; color: var(--green-deep); margin-bottom: 6px; font-size: 15px; }
+  .card-body { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+  /* LINK CARDS */
+  .link-card {
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border: 1px solid var(--cream-dark);
+    border-radius: 12px; padding: 18px 20px;
+    text-decoration: none; color: inherit;
+    margin-bottom: 12px; transition: box-shadow 0.2s, border-color 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .link-card:hover { border-color: var(--green-light); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .link-card-icon { font-size: 28px; flex-shrink: 0; }
+  .link-card-title { font-weight: 600; color: var(--green-deep); font-size: 15px; margin-bottom: 3px; }
+  .link-card-url { font-size: 12px; color: var(--text-light); font-family: var(--font-mono); }
+
+  /* CALLOUTS */
+  .callout {
+    border-radius: 10px; padding: 16px 18px;
+    font-size: 14px; line-height: 1.6;
+    margin: 16px 0; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout.tip { background: rgba(74,140,92,0.08); border: 1px solid rgba(74,140,92,0.25); color: var(--green-mid); }
+  .callout.warn { background: rgba(201,168,76,0.10); border: 1px solid rgba(201,168,76,0.35); color: #7a5c10; }
+  .callout.info { background: var(--blue-light); border: 1px solid rgba(26,95,168,0.2); color: #1a3a6a; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--cream-dark); margin: 48px 0; }
+
+  /* TOKEN INFO */
+  .token-box {
+    background: var(--green-deep); border-radius: 10px; padding: 18px 20px;
+    font-family: var(--font-mono); font-size: 13px; color: var(--green-pale);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; margin: 12px 0;
+  }
+  .token-box span { word-break: break-all; }
+  .token-badge { background: var(--gold); color: var(--green-deep); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; white-space: nowrap; font-family: var(--font-body); }
+
+  /* PERMISSIONS TABLE */
+  .perm-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .perm-table th { background: var(--green-deep); color: #fff; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .perm-table th:first-child { border-radius: 8px 0 0 0; }
+  .perm-table th:last-child { border-radius: 0 8px 0 0; }
+  .perm-table td { padding: 10px 14px; border-bottom: 1px solid var(--cream-dark); vertical-align: top; }
+  .perm-table tr:last-child td { border-bottom: none; }
+  .perm-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+  .badge-rw { background: #d4edda; color: #155724; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .badge-none { background: var(--cream-dark); color: var(--text-light); font-size: 11px; padding: 2px 8px; border-radius: 100px; }
+
+  /* FOOTER */
+  .footer { background: var(--green-deep); color: var(--green-pale); text-align: center; padding: 32px 24px; font-size: 13px; }
+  .footer a { color: var(--gold-light); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 18px 60px; }
+    pre { font-size: 12px; padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="header-back" href="index.html">← Back to trip site</a>
+  <p class="header-eyebrow">England 2026 · Project Notes</p>
+  <h1 class="header-title">How This Site <em>Works</em></h1>
+  <p class="header-sub">Everything you need to know to maintain, update, and rebuild this trip website from scratch.</p>
+</div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#overview">Overview</a>
+    <a href="#github">GitHub</a>
+    <a href="#claude">Updating with Claude</a>
+    <a href="#maps">Google Maps</a>
+    <a href="#token">GitHub Token</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#links">All Links</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="doc-section" id="overview">
+    <p class="section-num">01 — Overview</p>
+    <h2 class="section-heading">What <em>This Is</em></h2>
+    <p class="section-intro">A single-page family trip website hosted for free on GitHub Pages, built and maintained by Claude (AI). No framework, no build step — just one <code>index.html</code> file.</p>
+
+    <div class="card">
+      <div class="card-title">🏗️ Architecture</div>
+      <div class="card-body">
+        <strong>index.html</strong> — the entire site in one file. HTML + CSS + JavaScript, no dependencies except Google Fonts and Google Maps.<br><br>
+        <strong>Hosting</strong> — GitHub Pages (free). Every push to the <code>main</code> branch auto-publishes within ~60 seconds.<br><br>
+        <strong>Map</strong> — Google Maps JavaScript API with a custom styled map, numbered pins, and separate line styles for flights vs driving.
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div>To update the site, just tell Claude what to change in a new conversation — as long as you have the GitHub token and Google Maps key handy, Claude can push changes directly.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── GITHUB ── -->
+  <div class="doc-section" id="github">
+    <p class="section-num">02 — GitHub</p>
+    <h2 class="section-heading">GitHub Pages <em>Setup</em></h2>
+    <p class="section-intro">The site is hosted on GitHub Pages — a free static hosting service built into every GitHub repository.</p>
+
+    <a class="link-card" href="https://github.com/aviadhevrony/England-2026" target="_blank">
+      <span class="link-card-icon">📁</span>
+      <div>
+        <div class="link-card-title">aviadhevrony / England-2026</div>
+        <div class="link-card-url">github.com/aviadhevrony/England-2026</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="https://aviadhevrony.github.io/England-2026/" target="_blank">
+      <span class="link-card-icon">🌐</span>
+      <div>
+        <div class="link-card-title">Live Site</div>
+        <div class="link-card-url">aviadhevrony.github.io/England-2026/</div>
+      </div>
+    </a>
+
+    <h3 style="font-size:16px; font-weight:600; color:var(--green-deep); margin: 24px 0 12px;">Enabling GitHub Pages (one-time)</h3>
+    <ol class="steps">
+      <li>Go to the repository: <code>github.com/aviadhevrony/England-2026</code></li>
+      <li>Click <strong>Settings</strong> (top menu of the repo)</li>
+      <li>In the left sidebar, click <strong>Pages</strong></li>
+      <li>Under <strong>Source</strong>, select <strong>Deploy from a branch</strong></li>
+      <li>Set branch to <strong>main</strong> and folder to <strong>/ (root)</strong></li>
+      <li>Click <strong>Save</strong> — the site goes live within ~60 seconds</li>
+    </ol>
+
+    <div class="callout info">
+      <span class="callout-icon">ℹ️</span>
+      <div>The URL format for GitHub Pages is always <code>https://USERNAME.github.io/REPO-NAME/</code>. Since the repo is public, the site is accessible to anyone with the link — no login needed.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── CLAUDE ── -->
+  <div class="doc-section" id="claude">
+    <p class="section-num">03 — Updating with Claude</p>
+    <h2 class="section-heading">How to <em>Update</em> the Site</h2>
+    <p class="section-intro">Claude can update the site directly — no need to download, edit, or re-upload anything. Here's how to do it in a new conversation.</p>
+
+    <ol class="steps">
+      <li>
+        <div>Open a new Claude conversation at <strong>claude.ai</strong></div>
+        <div class="note">The trip site context isn't remembered automatically — you'll need to give Claude a quick briefing.</div>
+      </li>
+      <li>
+        <div>Tell Claude: <em>"I have a trip website at <code>https://aviadhevrony.github.io/England-2026/</code>, hosted on GitHub at <code>aviadhevrony/England-2026</code>. Here is my GitHub token: [paste token]. Please [describe what you want changed]."</em></div>
+      </li>
+      <li>
+        <div>Claude will fetch the current file from GitHub, make the changes, and push it back directly</div>
+        <div class="note">Claude uses the GitHub REST API — no local tools or installations needed.</div>
+      </li>
+      <li>
+        <div>Wait ~60 seconds, then hard-refresh the live site (<strong>Cmd+Shift+R</strong> on Mac, <strong>Ctrl+Shift+R</strong> on Windows)</div>
+      </li>
+    </ol>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div><strong>Token security:</strong> Don't paste your token in a public place. In a Claude conversation it's fine — Anthropic doesn't store or log it. But after each session, consider revoking the token and generating a fresh one. Takes 2 minutes.</div>
+    </div>
+
+    <h3 style="font-size:16px; font-weight:600; color:var(--green-deep); margin: 24px 0 12px;">What you can ask Claude to add</h3>
+    <div class="card"><div class="card-title">🏨 Hotels</div><div class="card-body">"We're staying at [hotel name] in [location] on [dates] — add it to the plan"</div></div>
+    <div class="card"><div class="card-title">📍 Activities & places</div><div class="card-body">"Add Ullswater lake cruise on day 2, with a link to the booking site"</div></div>
+    <div class="card"><div class="card-title">🗺️ Map pins</div><div class="card-body">"Add a pin for [place name] on the map"</div></div>
+    <div class="card"><div class="card-title">📷 Photos</div><div class="card-body">"Add this photo [URL] to the Day 3 section"</div></div>
+    <div class="card"><div class="card-title">📧 Booking confirmations</div><div class="card-body">"Read my hotel confirmation email from [hotel] and add the details to the site" — Claude can read your Gmail if connected</div></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── MAPS ── -->
+  <div class="doc-section" id="maps">
+    <p class="section-num">04 — Google Maps</p>
+    <h2 class="section-heading">Google Maps <em>API Key</em></h2>
+    <p class="section-intro">The interactive map uses the Google Maps JavaScript API. The key is embedded in the page and restricted to this site only.</p>
+
+    <h3 style="font-size:16px; font-weight:600; color:var(--green-deep); margin: 0 0 12px;">Creating a new key (if needed)</h3>
+    <ol class="steps">
+      <li>Go to <a href="https://console.cloud.google.com" target="_blank" style="color:var(--green-light)">console.cloud.google.com</a></li>
+      <li>Select your project (or create a new one)</li>
+      <li><strong>APIs & Services → Library</strong> → search <strong>Maps JavaScript API</strong> → Enable</li>
+      <li><strong>APIs & Services → Credentials → + Create Credentials → API Key</strong></li>
+      <li>Copy the key — it looks like <code>AIzaSy...</code></li>
+    </ol>
+
+    <h3 style="font-size:16px; font-weight:600; color:var(--green-deep); margin: 24px 0 12px;">Restricting the key (important)</h3>
+    <ol class="steps">
+      <li>Click the pencil/edit icon on your key in the Credentials list</li>
+      <li>Under <strong>Application restrictions</strong> → select <strong>Websites</strong> → add <code>aviadhevrony.github.io/*</code></li>
+      <li>Under <strong>API restrictions</strong> → select <strong>Restrict key</strong> → choose <strong>Maps JavaScript API</strong> only</li>
+      <li>Click <strong>Save</strong> — restrictions take up to 5 minutes to propagate</li>
+    </ol>
+
+    <div class="callout info">
+      <span class="callout-icon">💰</span>
+      <div><strong>Cost:</strong> Google gives $200 free credit per month. The Maps JavaScript API costs ~$7 per 1,000 map loads. A family trip site will use essentially nothing — you won't be charged.</div>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div>The API key is visible in the page source — that's normal and fine as long as the domain restriction is set correctly. Without the restriction, anyone could use your key.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── TOKEN ── -->
+  <div class="doc-section" id="token">
+    <p class="section-num">05 — GitHub Token</p>
+    <h2 class="section-heading">Personal Access <em>Token</em></h2>
+    <p class="section-intro">Claude uses a GitHub fine-grained personal access token to push files directly to the repository.</p>
+
+    <h3 style="font-size:16px; font-weight:600; color:var(--green-deep); margin: 0 0 12px;">Creating a token</h3>
+    <ol class="steps">
+      <li>Go to <strong>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong></li>
+      <li>Click <strong>Generate new token</strong></li>
+      <li>Set a name (e.g. "England 2026 Claude") and expiration (90 days is enough)</li>
+      <li>Under <strong>Repository access</strong> → select <strong>Only select repositories</strong> → pick <code>England-2026</code></li>
+      <li>Under <strong>Permissions → Repository permissions</strong> → set <strong>Contents</strong> to <strong>Read and Write</strong></li>
+      <li>Click <strong>Generate token</strong> and copy it immediately (you won't see it again)</li>
+    </ol>
+
+    <h3 style="font-size:16px; font-weight:600; color:var(--green-deep); margin: 24px 0 12px;">Minimum permissions needed</h3>
+    <table class="perm-table">
+      <thead>
+        <tr><th>Permission</th><th>Scope</th><th>Level</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Contents</strong></td><td>Repository</td><td><span class="badge-rw">Read & Write</span></td><td>Read current file + push updates</td></tr>
+        <tr><td>Everything else</td><td>—</td><td><span class="badge-none">None</span></td><td>Not needed</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <span class="callout-icon">🔒</span>
+      <div>Token starts with <code>github_pat_</code>. After sharing it with Claude in a session, revoke it from GitHub and generate a fresh one next time. Revoking: <strong>Settings → Developer settings → Fine-grained tokens → Revoke</strong>.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── WORKFLOW ── -->
+  <div class="doc-section" id="workflow">
+    <p class="section-num">06 — Workflow</p>
+    <h2 class="section-heading">Typical <em>Session</em></h2>
+    <p class="section-intro">How a typical update session with Claude looks, from start to finish.</p>
+
+    <ol class="steps">
+      <li>
+        <strong>Start a new Claude conversation</strong>
+        <div class="note">claude.ai — use Claude Sonnet or higher for best results</div>
+      </li>
+      <li>
+        <strong>Give context</strong>
+        <div class="note">Paste something like: <em>"I have a trip website at aviadhevrony.github.io/England-2026 on GitHub repo aviadhevrony/England-2026. Token: github_pat_... Maps key: AIzaSy... I want to add [X]."</em></div>
+      </li>
+      <li>
+        <strong>Share any new info</strong>
+        <div class="note">Forward booking confirmation emails, paste hotel names, describe activities, share photo URLs</div>
+      </li>
+      <li>
+        <strong>Claude fetches, edits, and pushes</strong>
+        <div class="note">Claude reads the current index.html from GitHub, makes the changes, and pushes it back in one step</div>
+      </li>
+      <li>
+        <strong>Hard refresh the live site</strong>
+        <div class="note">Cmd+Shift+R (Mac) · Ctrl+Shift+R (Windows) · Wait ~60 seconds after push</div>
+      </li>
+      <li>
+        <strong>Revoke the token</strong>
+        <div class="note">Generate a fresh one next session for security</div>
+      </li>
+    </ol>
+
+    <div class="callout tip">
+      <span class="callout-icon">📧</span>
+      <div><strong>Pro tip:</strong> Claude has access to your Gmail. You can say "Read my booking confirmation from [hotel/airline] and add it to the site" — Claude will find the email and extract all the details automatically.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── ALL LINKS ── -->
+  <div class="doc-section" id="links">
+    <p class="section-num">07 — Quick Reference</p>
+    <h2 class="section-heading">All <em>Links</em></h2>
+
+    <a class="link-card" href="https://aviadhevrony.github.io/England-2026/" target="_blank">
+      <span class="link-card-icon">🌐</span>
+      <div><div class="link-card-title">Live Trip Site</div><div class="link-card-url">aviadhevrony.github.io/England-2026/</div></div>
+    </a>
+    <a class="link-card" href="https://github.com/aviadhevrony/England-2026" target="_blank">
+      <span class="link-card-icon">📁</span>
+      <div><div class="link-card-title">GitHub Repository</div><div class="link-card-url">github.com/aviadhevrony/England-2026</div></div>
+    </a>
+    <a class="link-card" href="https://github.com/settings/personal-access-tokens" target="_blank">
+      <span class="link-card-icon">🔑</span>
+      <div><div class="link-card-title">GitHub Tokens (manage / revoke / create)</div><div class="link-card-url">github.com/settings/personal-access-tokens</div></div>
+    </a>
+    <a class="link-card" href="https://console.cloud.google.com/apis/credentials" target="_blank">
+      <span class="link-card-icon">🗺️</span>
+      <div><div class="link-card-title">Google Maps API Key (manage)</div><div class="link-card-url">console.cloud.google.com/apis/credentials</div></div>
+    </a>
+    <a class="link-card" href="https://claude.ai" target="_blank">
+      <span class="link-card-icon">🤖</span>
+      <div><div class="link-card-title">Claude — to update the site</div><div class="link-card-url">claude.ai</div></div>
+    </a>
+    <a class="link-card" href="https://booking.elal.com/manage/login?lang=en" target="_blank">
+      <span class="link-card-icon">✈️</span>
+      <div><div class="link-card-title">EL AL — Manage Booking YI8VR4</div><div class="link-card-url">booking.elal.com/manage/login</div></div>
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <a href="index.html">← Back to England 2026 trip site</a><br>
+  <span style="opacity:0.5; font-size:11px; margin-top:8px; display:block;">Built with Claude · Hosted on GitHub Pages · Last updated June 2026</span>
+</footer>
+
+</body>
+</html>
