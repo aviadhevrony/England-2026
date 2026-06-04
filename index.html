@@ -211,8 +211,9 @@
     .day-title { font-size: 18px; }
     .timeline { padding-left: 22px; }
 
-    /* Crew — full width cards on mobile */
+    /* Crew — all single column on mobile, override inline grid styles */
     .crew-card { min-width: unset; width: 100%; }
+    .crew-grid[style] { display: flex !important; flex-direction: column !important; }
 
     /* Info grid single column */
     .info-grid { grid-template-columns: 1fr; }
