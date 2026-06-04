@@ -1933,6 +1933,7 @@ async function loadWeather() {
         icon: day.noonItem.weather[0].icon,
         min: Math.round(Math.min(...day.items.map(i => i.main.temp))),
         max: Math.round(Math.max(...day.items.map(i => i.main.temp))),
+        count: day.items.length,
       }));
 
       el.innerHTML = `
@@ -1950,8 +1951,8 @@ async function loadWeather() {
             <div class="wx-day">
               <div class="wx-day-name">${shortDay(d.dt)}</div>
               <div class="wx-day-icon">${owmIcon(d.icon)}</div>
-              <div class="wx-day-temp">${d.max}°</div>
-              <div class="wx-day-low">${d.min}°</div>
+              <div class="wx-day-temp">${d.max}° / ${d.min}°</div>
+              <div class="wx-day-low" style="font-size:10px;opacity:0.5;">${d.count} slots</div>
             </div>
           `).join('')}
         </div>`;
