@@ -207,6 +207,8 @@
       <li><a href="#github">GitHub Pages setup</a></li>
       <li><a href="#token">GitHub personal access token</a></li>
       <li><a href="#maps">Google Maps API key</a></li>
+      <li><a href="#weather">OpenWeatherMap API key</a></li>
+      <li><a href="#exchange">Exchange rate (Frankfurter)</a></li>
       <li><a href="#updating">Updating the site</a></li>
       <li><a href="#structure">File structure</a></li>
       <li><a href="#eta">UK ETA — entry requirement</a></li>
@@ -306,6 +308,89 @@
       <div class="info-box-icon">ℹ️</div>
       <div>The API key is embedded directly in <code>index.html</code>. It is protected by the website restriction above, so it can only be used on your GitHub Pages domain and is safe to include in the file.</div>
     </div>
+
+    <h3 style="font-size:16px; color:var(--green-deep); margin: 20px 0 12px; font-family:var(--font-display);">APIs enabled on this key</h3>
+    <table class="token-table">
+      <tr><th>API</th><th>Used for</th></tr>
+      <tr><td>Maps JavaScript API</td><td>Interactive map, pins, polygons, overlays</td></tr>
+      <tr><td>Directions API</td><td>Real driving routes between stops (click a pin to load)</td></tr>
+    </table>
+    <div class="info-box warn" style="margin-top:12px;">
+      <div class="info-box-icon">⚠️</div>
+      <div>Both APIs must be enabled in <strong>Google Cloud Console → APIs & Services → Library</strong> and both must be added to the key's <strong>API restrictions</strong> list, otherwise routes won't load.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- WEATHER -->
+  <div class="doc-section" id="weather">
+    <p class="doc-section-label">Live weather</p>
+    <h2 class="doc-section-title">OpenWeatherMap <em>API Key</em></h2>
+    <p>The weather forecast cards in the Practical Info section use the OpenWeatherMap API to show live 5-day forecasts for the Lake District, Yorkshire, and London.</p>
+
+    <table class="token-table">
+      <tr><th>Detail</th><th>Info</th></tr>
+      <tr><td>Service</td><td>OpenWeatherMap — Free tier</td></tr>
+      <tr><td>Key in site</td><td><code>e6dd95f675d139adcfa6e1bd743d3484</code></td></tr>
+      <tr><td>Endpoints used</td><td><code>/data/2.5/weather</code> (current) · <code>/data/2.5/forecast</code> (5-day)</td></tr>
+      <tr><td>Free tier limit</td><td>1,000 calls/day — far more than needed</td></tr>
+      <tr><td>Forecast range</td><td>5 days ahead only · Trip weather visible from ~19 Aug</td></tr>
+      <tr><td>Historical averages</td><td>Hard-coded in the site for August context</td></tr>
+    </table>
+
+    <div class="info-box info" style="margin-top:16px;">
+      <div class="info-box-icon">ℹ️</div>
+      <div>The API key is embedded in <code>index.html</code>. Unlike the GitHub token, this is safe to leave in the file — OpenWeatherMap free keys have no billing attached and minimal abuse risk for a personal site.</div>
+    </div>
+
+    <h3 style="font-size:16px; color:var(--green-deep); margin: 20px 0 12px; font-family:var(--font-display);">If you need to regenerate the key</h3>
+    <ol class="steps">
+      <li><div class="step-num">1</div><div class="step-body"><strong>Log in to OpenWeatherMap</strong><span><a href="https://home.openweathermap.org/api_keys" target="_blank">home.openweathermap.org/api_keys</a></span></div></li>
+      <li><div class="step-num">2</div><div class="step-body"><strong>Copy your API key</strong><span>It's on the API Keys tab — the default key is fine</span></div></li>
+      <li><div class="step-num">3</div><div class="step-body"><strong>Tell Claude</strong><span>In a new session, say "update the OpenWeatherMap key to X" and Claude will update it in index.html and push to GitHub</span></div></li>
+    </ol>
+
+    <a class="link-card" href="https://home.openweathermap.org/api_keys" target="_blank" style="margin-top:16px;">
+      <div class="link-card-icon">🌤️</div>
+      <div class="link-card-text">
+        <div class="link-card-title">OpenWeatherMap — API Keys</div>
+        <div class="link-card-url">home.openweathermap.org/api_keys</div>
+      </div>
+      <div class="link-card-arrow">↗</div>
+    </a>
+  </div>
+
+  <hr>
+
+  <!-- EXCHANGE RATE -->
+  <div class="doc-section" id="exchange">
+    <p class="doc-section-label">Live currency</p>
+    <h2 class="doc-section-title">Frankfurter <em>Exchange Rate</em></h2>
+    <p>The Money card in Practical Info shows a live GBP → ILS exchange rate, fetched from Frankfurter every time the page loads.</p>
+
+    <table class="token-table">
+      <tr><th>Detail</th><th>Info</th></tr>
+      <tr><td>Service</td><td>Frankfurter — completely free, no API key</td></tr>
+      <tr><td>Endpoint</td><td><code>api.frankfurter.dev/v2/rates?base=GBP&quotes=ILS</code></td></tr>
+      <tr><td>Rate limits</td><td>None — open source project, no quotas</td></tr>
+      <tr><td>Update frequency</td><td>Daily (forex market rates)</td></tr>
+      <tr><td>No key needed</td><td>✅ Nothing to manage or renew</td></tr>
+    </table>
+
+    <div class="info-box tip" style="margin-top:16px;">
+      <div class="info-box-icon">💡</div>
+      <div>Frankfurter is fully open source and requires no account or API key. If the service ever goes down, the site gracefully shows "—" instead of the rate. No action needed on your part.</div>
+    </div>
+
+    <a class="link-card" href="https://frankfurter.dev" target="_blank" style="margin-top:16px;">
+      <div class="link-card-icon">💱</div>
+      <div class="link-card-text">
+        <div class="link-card-title">Frankfurter — Free Exchange Rates API</div>
+        <div class="link-card-url">frankfurter.dev</div>
+      </div>
+      <div class="link-card-arrow">↗</div>
+    </a>
   </div>
 
   <hr>
@@ -347,9 +432,10 @@
     <h2 class="doc-section-title">File <em>Structure</em></h2>
     <p>The repository contains just two files:</p>
     <div class="code-block"><span class="key">England-2026/</span>
-├── <span class="val">index.html</span>   <span class="comment"># The trip site — flights, map, itinerary, crew, info</span>
-├── <span class="val">docs.html</span>    <span class="comment"># This page — setup instructions and reference</span>
-└── <span class="val">README.md</span>    <span class="comment"># Auto-created by GitHub (ignored by Pages)</span></div>
+├── <span class="val">index.html</span>        <span class="comment"># The trip site — map, itinerary, crew, info</span>
+├── <span class="val">docs.html</span>         <span class="comment"># This page — setup instructions and reference</span>
+├── <span class="val">images/</span>           <span class="comment"># Crew avatar photos (aviad.jpg, liat.jpg, etc.)</span>
+└── <span class="val">README.md</span>         <span class="comment"># Auto-created by GitHub (ignored by Pages)</span></div>
 
     <p>The site uses no build tools, no npm, no frameworks. Everything is inline in <code>index.html</code> — HTML, CSS, and JavaScript in one file. External dependencies loaded from CDN:</p>
     <div class="code-block"><span class="comment"># Fonts (Google Fonts CDN)</span>
@@ -357,7 +443,12 @@
 <span class="val">DM Sans</span>          — body text
 
 <span class="comment"># Map</span>
-<span class="val">Google Maps JavaScript API</span> — interactive map with pins and routes</div>
+<span class="val">Google Maps JavaScript API</span> — interactive map, pins, polygons
+<span class="val">Google Directions API</span>      — real driving routes (click a pin to load)
+
+<span class="comment"># Live data</span>
+<span class="val">OpenWeatherMap API</span>         — live 5-day weather forecast (key required)
+<span class="val">Frankfurter API</span>            — live GBP → ILS exchange rate (no key needed)</div>
   </div>
 
   <hr>
@@ -459,6 +550,24 @@
       <div class="link-card-text">
         <div class="link-card-title">Commit History (all changes ever made)</div>
         <div class="link-card-url">github.com/aviadhevrony/England-2026/commits/main</div>
+      </div>
+      <div class="link-card-arrow">↗</div>
+    </a>
+
+    <a class="link-card" href="https://home.openweathermap.org/api_keys" target="_blank">
+      <div class="link-card-icon">🌤️</div>
+      <div class="link-card-text">
+        <div class="link-card-title">OpenWeatherMap API Keys</div>
+        <div class="link-card-url">home.openweathermap.org/api_keys</div>
+      </div>
+      <div class="link-card-arrow">↗</div>
+    </a>
+
+    <a class="link-card" href="https://frankfurter.dev" target="_blank">
+      <div class="link-card-icon">💱</div>
+      <div class="link-card-text">
+        <div class="link-card-title">Frankfurter — Exchange Rate API (no key needed)</div>
+        <div class="link-card-url">frankfurter.dev</div>
       </div>
       <div class="link-card-arrow">↗</div>
     </a>
