@@ -118,7 +118,8 @@
   /* CREW */
   .crew-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
   .crew-card { background: #fff; border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; border: 1px solid var(--cream-dark); flex: 1; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .crew-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--green-mid); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 18px; flex-shrink: 0; }
+  .crew-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--green-mid); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 18px; flex-shrink: 0; overflow: hidden; border: 2px solid var(--cream-dark); }
+  .crew-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .crew-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--green-deep); line-height: 1.2; margin-bottom: 2px; }
   .crew-role { font-size: 12px; color: var(--text-light); }
 
@@ -554,11 +555,11 @@
   <p class="section-label">Who's coming</p>
   <h2 class="section-title">The <em>Crew</em></h2>
   <div class="crew-grid">
-    <div class="crew-card"><div class="crew-avatar">A</div><div><div class="crew-name">Aviad</div><div class="crew-role">📱 Gadgets & logistics</div></div></div>
-    <div class="crew-card"><div class="crew-avatar">L</div><div><div class="crew-name">Liat</div><div class="crew-role">☕ Cafés & bakeries</div></div></div>
-    <div class="crew-card"><div class="crew-avatar">S</div><div><div class="crew-name">Shahar</div><div class="crew-role">✈️ Traveller</div></div></div>
-    <div class="crew-card"><div class="crew-avatar">E</div><div><div class="crew-name">Ella</div><div class="crew-role">✈️ Traveller</div></div></div>
-    <div class="crew-card"><div class="crew-avatar">O</div><div><div class="crew-name">Ori</div><div class="crew-role">✈️ Traveller</div></div></div>
+    <div class="crew-card"><div class="crew-avatar"><img src="images/aviad.jpg" alt="Aviad"></div><div><div class="crew-name">Aviad</div><div class="crew-role">📱 Gadgets & logistics</div></div></div>
+    <div class="crew-card"><div class="crew-avatar"><img src="images/liat.jpg" alt="Liat"></div><div><div class="crew-name">Liat</div><div class="crew-role">☕ Cafés & bakeries</div></div></div>
+    <div class="crew-card"><div class="crew-avatar"><img src="images/shahar.jpg" alt="Shahar"></div><div><div class="crew-name">Shahar</div><div class="crew-role">✈️ Traveller</div></div></div>
+    <div class="crew-card"><div class="crew-avatar"><img src="images/ella.jpg" alt="Ella"></div><div><div class="crew-name">Ella</div><div class="crew-role">✈️ Traveller</div></div></div>
+    <div class="crew-card"><div class="crew-avatar"><img src="images/ori.jpg" alt="Ori"></div><div><div class="crew-name">Ori</div><div class="crew-role">✈️ Traveller</div></div></div>
   </div>
 </section>
 
