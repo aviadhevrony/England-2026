@@ -25,633 +25,139 @@
     --text-dark: #1a1a1a;
     --text-mid: #444;
     --text-light: #888;
-    --red-el: #002F6C;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'DM Sans', sans-serif;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text-dark); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
 
-  body {
-    font-family: var(--font-body);
-    background: var(--cream);
-    color: var(--text-dark);
-    font-size: 15px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    background: var(--green-deep);
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 60px 24px 80px;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(74,140,92,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(201,168,76,0.10) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 100% at 50% 50%, rgba(26,58,42,0.6) 0%, transparent 80%);
-  }
-
-  /* Rolling hills silhouette */
-  .hills {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 180px;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-flag {
-    font-size: 52px;
-    margin-bottom: 16px;
-    display: block;
-    animation: float 4s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  .hero-eyebrow {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 16px;
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(42px, 8vw, 78px);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.05;
-    margin-bottom: 8px;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-
-  .hero-subtitle {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(16px, 2.5vw, 22px);
-    color: var(--green-pale);
-    margin-bottom: 32px;
-    opacity: 0.9;
-  }
-
-  .hero-dates {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 100px;
-    padding: 10px 24px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    margin-bottom: 48px;
-    backdrop-filter: blur(8px);
-  }
-
+  /* HERO */
+  .hero { position: relative; background: var(--green-deep); min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 60px 24px 80px; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(74,140,92,0.18) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 20%, rgba(201,168,76,0.10) 0%, transparent 55%); }
+  .hills { position: absolute; bottom: 0; left: 0; right: 0; height: 180px; }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-flag { font-size: 52px; margin-bottom: 16px; display: block; animation: float 4s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(42px, 8vw, 78px); font-weight: 700; color: #fff; line-height: 1.05; margin-bottom: 8px; }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle { font-family: var(--font-display); font-style: italic; font-size: clamp(16px, 2.5vw, 22px); color: var(--green-pale); margin-bottom: 32px; opacity: 0.9; }
+  .hero-dates { display: inline-flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 10px 24px; color: #fff; font-size: 14px; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 48px; backdrop-filter: blur(8px); }
   .hero-dates span { color: var(--gold-light); font-weight: 500; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 48px; }
+  .hero-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 6px 16px; color: var(--green-pale); font-size: 13px; }
 
-  .hero-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 48px;
-  }
-
-  .hero-pill {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 100px;
-    padding: 6px 16px;
-    color: var(--green-pale);
-    font-size: 13px;
-    backdrop-filter: blur(6px);
-  }
-
-  /* ── NAV ── */
-  .nav-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--green-deep);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
+  /* NAV */
+  .nav-bar { position: sticky; top: 0; z-index: 100; background: var(--green-deep); border-bottom: 1px solid rgba(255,255,255,0.1); overflow-x: auto; scrollbar-width: none; }
   .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-inner { display: flex; white-space: nowrap; min-width: max-content; padding: 0 8px; }
+  .nav-inner a { display: inline-block; padding: 14px 16px; color: var(--green-pale); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .nav-inner a:hover, .nav-inner a.active { color: var(--gold-light); border-bottom-color: var(--gold); }
 
-  .nav-inner {
-    display: flex;
-    gap: 0;
-    white-space: nowrap;
-    min-width: max-content;
-    padding: 0 8px;
-  }
+  /* SECTIONS */
+  section { padding: 64px 24px; max-width: 780px; margin: 0 auto; }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-light); margin-bottom: 8px; }
+  .section-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 700; color: var(--green-deep); line-height: 1.15; margin-bottom: 32px; }
+  .section-title em { font-style: italic; color: var(--green-light); }
 
-  .nav-inner a {
-    display: inline-block;
-    padding: 14px 16px;
-    color: var(--green-pale);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-  }
-  .nav-inner a:hover, .nav-inner a.active {
-    color: var(--gold-light);
-    border-bottom-color: var(--gold);
-  }
+  /* MAP */
+  #map-section { padding: 0; max-width: 100%; }
+  .map-header { padding: 64px 24px 32px; max-width: 780px; margin: 0 auto; }
+  #map { width: 100%; height: 500px; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 20px 24px 48px; max-width: 780px; margin: 0 auto; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
 
-  /* ── SECTIONS ── */
-  section {
-    padding: 64px 24px;
-    max-width: 780px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--green-light);
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 700;
-    color: var(--green-deep);
-    line-height: 1.15;
-    margin-bottom: 32px;
-  }
-
-  .section-title em {
-    font-style: italic;
-    color: var(--green-light);
-  }
-
-  /* ── FLIGHTS ── */
-  .flights-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .flight-card {
-    background: var(--green-deep);
-    color: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .flight-card::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 160px;
-    height: 160px;
-    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .flight-direction {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-
-  .flight-route {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .flight-airport {
-    flex: 1;
-  }
-
-  .flight-iata {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-
-  .flight-city {
-    font-size: 11px;
-    color: var(--green-pale);
-    opacity: 0.8;
-  }
-
-  .flight-arrow {
-    flex: 1;
-    text-align: center;
-  }
-
-  .flight-line {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--gold);
-  }
-
-  .flight-line::before, .flight-line::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.4;
-  }
-
-  .flight-number {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gold-light);
-    text-align: center;
-    margin-top: 4px;
-  }
-
-  .flight-times {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .flight-time-block { }
+  /* FLIGHTS */
+  .flights-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .flight-card { background: var(--green-deep); color: #fff; border-radius: 16px; padding: 24px; position: relative; overflow: hidden; }
+  .flight-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); pointer-events: none; }
+  .flight-direction { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 12px; font-weight: 500; }
+  .flight-route { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .flight-airport { flex: 1; }
+  .flight-iata { font-family: var(--font-display); font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
+  .flight-city { font-size: 11px; color: var(--green-pale); opacity: 0.8; }
+  .flight-arrow { flex: 1; text-align: center; }
+  .flight-line { display: flex; align-items: center; gap: 6px; color: var(--gold); }
+  .flight-line::before, .flight-line::after { content: ''; flex: 1; height: 1px; background: var(--gold); opacity: 0.4; }
+  .flight-number { font-size: 12px; font-weight: 500; color: var(--gold-light); text-align: center; margin-top: 4px; }
+  .flight-times { display: flex; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
   .flight-time-label { font-size: 10px; color: var(--green-pale); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
   .flight-time-value { font-size: 22px; font-family: var(--font-display); font-weight: 700; }
   .flight-time-date { font-size: 11px; color: var(--green-pale); opacity: 0.8; margin-top: 1px; }
+  .flight-meta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .flight-badge { background: rgba(255,255,255,0.1); border-radius: 100px; padding: 4px 10px; font-size: 11px; color: var(--green-pale); }
 
-  .flight-meta {
-    display: flex;
-    gap: 12px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-
-  .flight-badge {
-    background: rgba(255,255,255,0.1);
-    border-radius: 100px;
-    padding: 4px 10px;
-    font-size: 11px;
-    color: var(--green-pale);
-  }
-
-  /* ── ITINERARY ── */
-  .day-header {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 20px;
-    margin-top: 40px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--green-pale);
-  }
-
-  .day-number {
-    font-family: var(--font-display);
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--green-deep);
-    opacity: 0.18;
-    line-height: 1;
-    min-width: 52px;
-  }
-
+  /* ITINERARY */
+  .day-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; margin-top: 40px; padding-bottom: 12px; border-bottom: 2px solid var(--green-pale); }
+  .day-number { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--green-deep); opacity: 0.18; line-height: 1; min-width: 52px; }
   .day-info { flex: 1; }
+  .day-date { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green-light); margin-bottom: 2px; }
+  .day-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--green-deep); line-height: 1.2; }
+  .day-sub { font-style: italic; color: var(--text-light); font-size: 13px; margin-top: 2px; }
+  .timeline { position: relative; padding-left: 28px; margin-bottom: 8px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 0; width: 1px; background: var(--green-pale); }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-item::before { content: ''; position: absolute; left: -24px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--green-light); border: 2px solid var(--cream); }
+  .tl-item.highlight::before { background: var(--gold); width: 10px; height: 10px; left: -25px; top: 5px; }
+  .tl-time { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; color: var(--text-light); text-transform: uppercase; margin-bottom: 2px; }
+  .tl-title { font-weight: 500; color: var(--text-dark); font-size: 15px; margin-bottom: 3px; }
+  .tl-desc { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
 
-  .day-date {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--green-light);
-    margin-bottom: 2px;
-  }
-
-  .day-title {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--green-deep);
-    line-height: 1.2;
-  }
-
-  .day-sub {
-    font-style: italic;
-    color: var(--text-light);
-    font-size: 13px;
-    margin-top: 2px;
-  }
-
-  /* Timeline items */
-  .timeline {
-    position: relative;
-    padding-left: 28px;
-    margin-bottom: 8px;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 8px;
-    bottom: 0;
-    width: 1px;
-    background: var(--green-pale);
-  }
-
-  .tl-item {
-    position: relative;
-    margin-bottom: 20px;
-  }
-
-  .tl-item::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 6px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green-light);
-    border: 2px solid var(--cream);
-  }
-
-  .tl-item.highlight::before {
-    background: var(--gold);
-    width: 10px;
-    height: 10px;
-    left: -25px;
-    top: 5px;
-  }
-
-  .tl-time {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--text-light);
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-
-  .tl-title {
-    font-weight: 500;
-    color: var(--text-dark);
-    font-size: 15px;
-    margin-bottom: 3px;
-  }
-
-  .tl-desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-
-  .tl-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    color: var(--green-light);
-    text-decoration: none;
-    margin-top: 4px;
-    font-weight: 500;
-  }
-  .tl-link:hover { color: var(--green-deep); }
-  .tl-link::after { content: '↗'; font-size: 10px; }
-
-  /* ── PRACTICAL ── */
-  .info-section {
-    background: var(--green-deep);
-    color: #fff;
-    padding: 64px 24px;
-  }
-
-  .info-inner {
-    max-width: 780px;
-    margin: 0 auto;
-  }
-
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 32px;
-  }
-
-  .info-card {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px;
-  }
-
+  /* PRACTICAL */
+  .info-section { background: var(--green-deep); color: #fff; padding: 64px 24px; }
+  .info-inner { max-width: 780px; margin: 0 auto; }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 32px; }
+  .info-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; }
   .info-card-icon { font-size: 24px; margin-bottom: 10px; }
-  .info-card-title {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 8px;
-  }
-  .info-card-body {
-    font-size: 13px;
-    color: var(--green-pale);
-    line-height: 1.6;
-  }
+  .info-card-title { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+  .info-card-body { font-size: 13px; color: var(--green-pale); line-height: 1.6; }
   .info-card-body strong { color: #fff; }
 
-  /* ── CREW ── */
-  .crew-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 24px;
-  }
+  /* CREW */
+  .crew-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+  .crew-card { background: #fff; border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; border: 1px solid var(--cream-dark); flex: 1; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .crew-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--green-mid); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 18px; flex-shrink: 0; }
+  .crew-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--green-deep); line-height: 1.2; margin-bottom: 2px; }
+  .crew-role { font-size: 12px; color: var(--text-light); }
 
-  .crew-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    border: 1px solid var(--cream-dark);
-    flex: 1;
-    min-width: 180px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-
-  .crew-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--green-mid);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: #fff;
-    font-size: 18px;
-  }
-
-  .crew-name {
-    font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--green-deep);
-    line-height: 1.2;
-    margin-bottom: 2px;
-  }
-
-  .crew-role {
-    font-size: 12px;
-    color: var(--text-light);
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--green-deep);
-    color: var(--green-pale);
-    text-align: center;
-    padding: 40px 24px;
-    font-size: 13px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
+  /* FOOTER */
+  .footer { background: var(--green-deep); color: var(--green-pale); text-align: center; padding: 40px 24px; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); }
   .footer strong { color: var(--gold-light); }
 
-  /* ── DIVIDER ── */
-  .divider {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 24px;
-    border: none;
-    border-top: 1px solid var(--cream-dark);
-  }
+  .divider { max-width: 780px; margin: 0 auto; padding: 0 24px; border: none; border-top: 1px solid var(--cream-dark); }
+  .coming-soon { background: rgba(74,140,92,0.08); border: 1.5px dashed var(--green-pale); border-radius: 12px; padding: 24px; text-align: center; color: var(--text-light); font-size: 14px; font-style: italic; margin-top: 12px; }
+  .coming-soon strong { color: var(--green-light); font-style: normal; }
+  .note-card { background: rgba(201,168,76,0.07); border: 1.5px solid rgba(201,168,76,0.3); border-radius: 12px; padding: 16px 20px; font-size: 14px; color: var(--text-mid); margin-top: 16px; }
+  .note-card strong { color: var(--green-deep); }
 
-  /* ── PHASE BADGE ── */
-  .phase-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--green-pale);
-    color: var(--green-deep);
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 500;
-    margin-bottom: 24px;
-  }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
 
-  /* ── SCROLL ANIMATIONS ── */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
     section { padding: 48px 20px; }
+    #map { height: 380px; }
     .flight-iata { font-size: 26px; }
-    .hero-pill { font-size: 12px; }
     .crew-card { min-width: 150px; }
   }
-
-  /* ── COMING SOON CARD ── */
-  .coming-soon {
-    background: rgba(74,140,92,0.08);
-    border: 1.5px dashed var(--green-pale);
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    color: var(--text-light);
-    font-size: 14px;
-    font-style: italic;
-    margin-top: 12px;
-  }
-  .coming-soon strong { color: var(--green-light); font-style: normal; }
-
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
-
   <svg class="hills" viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,180 L0,120 C60,100 120,60 200,70 C280,80 320,110 400,100 C480,90 540,50 620,55 C700,60 760,100 840,95 C920,90 980,55 1060,50 C1140,45 1200,80 1280,85 C1360,90 1400,70 1440,65 L1440,180 Z" fill="rgba(45,90,61,0.5)"/>
     <path d="M0,180 L0,140 C80,120 160,90 260,95 C360,100 400,130 500,125 C600,120 660,85 760,80 C860,75 940,110 1040,108 C1140,106 1220,80 1320,78 C1380,77 1420,88 1440,95 L1440,180 Z" fill="rgba(26,58,42,0.8)"/>
   </svg>
-
   <div class="hero-content">
     <span class="hero-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
     <p class="hero-eyebrow">Hevrony Family · Summer 2026</p>
     <h1 class="hero-title">England<br><em>August</em></h1>
     <p class="hero-subtitle">Lake District · Yorkshire · London</p>
-    <div class="hero-dates">
-      <span>24 Aug</span>
-      —
-      <span>1 Sep</span>
-      &nbsp;·&nbsp; 9 days · 5 travellers
-    </div>
+    <div class="hero-dates"><span>24 Aug</span> — <span>1 Sep</span> &nbsp;·&nbsp; 9 days · 5 travellers</div>
     <div class="hero-pills">
       <div class="hero-pill">✈️ EL AL · YI8VR4</div>
       <div class="hero-pill">🚗 7-seater SUV</div>
@@ -661,24 +167,22 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<!-- NAV -->
 <nav class="nav-bar">
   <div class="nav-inner">
     <a href="#flights">✈️ Flights</a>
+    <a href="#map-section">🗺️ Map</a>
     <a href="#itinerary">📅 Plan</a>
     <a href="#crew">👥 Crew</a>
     <a href="#practical">ℹ️ Info</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════ FLIGHTS ═══════════════════════════════ -->
+<!-- FLIGHTS -->
 <section id="flights" class="fade-in">
   <p class="section-label">Getting there</p>
   <h2 class="section-title">The <em>Flights</em></h2>
-
   <div class="flights-grid">
-
-    <!-- Outbound -->
     <div class="flight-card">
       <p class="flight-direction">✈ Outbound — Sunday 24 August</p>
       <div class="flight-route">
@@ -714,8 +218,6 @@
         <span class="flight-badge">5 passengers</span>
       </div>
     </div>
-
-    <!-- Return -->
     <div class="flight-card">
       <p class="flight-direction">✈ Return — Monday 31 August</p>
       <div class="flight-route">
@@ -748,54 +250,66 @@
         <span class="flight-badge">⏱ 4h 55m</span>
         <span class="flight-badge">💺 Economy Classic</span>
         <span class="flight-badge">🧳 1 bag each</span>
-        <span class="flight-badge">Note: flies from LHR, not LTN</span>
       </div>
     </div>
-
   </div>
-
-  <div class="coming-soon" style="margin-top:20px; text-align:left; border-style:solid; background: rgba(201,168,76,0.07); border-color: rgba(201,168,76,0.3);">
-    <strong>📍 Note on airports:</strong> You arrive into <strong>Luton</strong> and depart from <strong>Heathrow</strong> — plan to be in London on the evening of 31 Aug.
-  </div>
+  <div class="note-card"><strong>📍 Note:</strong> You arrive into <strong>Luton</strong> and depart from <strong>Heathrow</strong> — plan to be in London on the evening of 31 Aug.</div>
 </section>
 
 <hr class="divider">
 
-<!-- ═══════════════════════════════ ITINERARY ═══════════════════════════════ -->
+<!-- MAP -->
+<div id="map-section" class="fade-in">
+  <div class="map-header">
+    <p class="section-label">The route</p>
+    <h2 class="section-title">The <em>Journey</em></h2>
+    <p style="color:var(--text-mid); font-size:14px; margin-bottom: 0;">From Luton airport north to the Lakes, across to Yorkshire, then down to London and out through Heathrow.</p>
+  </div>
+  <div id="map"></div>
+  <div class="map-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1a3a2a"></div> Airports</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4a8c5c"></div> Lake District</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div> Yorkshire</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div> London</div>
+    <div class="legend-item" style="gap:6px"><div style="width:28px; height:2px; background:#4a8c5c; border-top: 2px dashed #4a8c5c;"></div> Route</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ITINERARY -->
 <section id="itinerary" class="fade-in">
   <p class="section-label">Day by day</p>
   <h2 class="section-title">The <em>Plan</em></h2>
-  <p style="color:var(--text-mid); margin-bottom:8px; font-size:14px;">9 days in England — hotels and detailed activities to be added as the planning progresses.</p>
+  <p style="color:var(--text-mid); margin-bottom:8px; font-size:14px;">Hotels and detailed activities will be added as planning progresses.</p>
 
-  <!-- DAY 1 -->
   <div class="day-header fade-in">
     <div class="day-number">1</div>
     <div class="day-info">
       <div class="day-date">Sunday · 24 August</div>
       <div class="day-title">Arrival — London Luton ✈️</div>
-      <div class="day-sub">Early morning landing, head north to the Lake District</div>
+      <div class="day-sub">Early morning landing, drive north to the Lake District</div>
     </div>
   </div>
   <div class="timeline fade-in">
     <div class="tl-item highlight">
       <div class="tl-time">04:50 → 08:15</div>
       <div class="tl-title">Flight LY311 · Tel Aviv → Luton</div>
-      <div class="tl-desc">5h 25m flight. Arrive London Luton airport. Collect bags, pick up the 7-seater SUV.</div>
+      <div class="tl-desc">Arrive London Luton. Collect bags, pick up the 7-seater SUV.</div>
     </div>
     <div class="tl-item">
       <div class="tl-time">Morning</div>
-      <div class="tl-title">Drive north — Lake District</div>
-      <div class="tl-desc">~4.5 hour drive from Luton to the Lake District. Stop along the way for breakfast.</div>
+      <div class="tl-title">Drive north — Lake District (~4.5 hrs)</div>
+      <div class="tl-desc">Head up the M6. Stop for breakfast along the way.</div>
     </div>
     <div class="tl-item">
       <div class="tl-time">Afternoon</div>
       <div class="tl-title">Check in & settle</div>
-      <div class="tl-desc">Check into accommodation, rest, and explore nearby surroundings gently.</div>
+      <div class="tl-desc">Arrive the Lake District, check in, gentle first explore.</div>
     </div>
   </div>
   <div class="coming-soon fade-in"><strong>Hotel to be added</strong> — Lake District accommodation</div>
 
-  <!-- DAY 2 -->
   <div class="day-header fade-in">
     <div class="day-number">2</div>
     <div class="day-info">
@@ -806,7 +320,6 @@
   </div>
   <div class="coming-soon fade-in"><strong>Activities to be added</strong> — hikes capped at 2 hours, scenic drives, lakes</div>
 
-  <!-- DAY 3 -->
   <div class="day-header fade-in">
     <div class="day-number">3</div>
     <div class="day-info">
@@ -817,18 +330,16 @@
   </div>
   <div class="coming-soon fade-in"><strong>Activities to be added</strong></div>
 
-  <!-- DAY 4 -->
   <div class="day-header fade-in">
     <div class="day-number">4</div>
     <div class="day-info">
       <div class="day-date">Wednesday · 27 August</div>
       <div class="day-title">Drive to Yorkshire 🚗</div>
-      <div class="day-sub">Lake District → Yorkshire Dales</div>
+      <div class="day-sub">Lake District → Yorkshire Dales (~1.5 hrs)</div>
     </div>
   </div>
   <div class="coming-soon fade-in"><strong>Route & stops to be added</strong></div>
 
-  <!-- DAY 5 -->
   <div class="day-header fade-in">
     <div class="day-number">5</div>
     <div class="day-info">
@@ -839,7 +350,6 @@
   </div>
   <div class="coming-soon fade-in"><strong>Activities to be added</strong></div>
 
-  <!-- DAY 6 -->
   <div class="day-header fade-in">
     <div class="day-number">6</div>
     <div class="day-info">
@@ -850,31 +360,29 @@
   </div>
   <div class="coming-soon fade-in"><strong>Activities to be added</strong></div>
 
-  <!-- DAY 7 -->
   <div class="day-header fade-in">
     <div class="day-number">7</div>
     <div class="day-info">
       <div class="day-date">Saturday · 30 August</div>
       <div class="day-title">Drive to London 🏙️</div>
-      <div class="day-sub">Yorkshire → London · ~3.5 hours</div>
+      <div class="day-sub">Yorkshire → London (~3.5 hrs)</div>
     </div>
   </div>
   <div class="coming-soon fade-in"><strong>Hotel to be added</strong> — London accommodation</div>
 
-  <!-- DAY 8 -->
   <div class="day-header fade-in">
     <div class="day-number">8</div>
     <div class="day-info">
       <div class="day-date">Sunday · 31 August</div>
       <div class="day-title">London 🎡 · Departure Night</div>
-      <div class="day-sub">Full day in London — fly home at 22:10 from Heathrow</div>
+      <div class="day-sub">Full day in London — fly home 22:10 from Heathrow</div>
     </div>
   </div>
   <div class="timeline fade-in">
     <div class="tl-item">
       <div class="tl-time">All day</div>
       <div class="tl-title">London — sightseeing</div>
-      <div class="tl-desc">A full day to explore London. Specific plans to be added.</div>
+      <div class="tl-desc">A full day to explore. Specific plans to be added.</div>
     </div>
     <div class="tl-item highlight">
       <div class="tl-time">~19:00</div>
@@ -887,150 +395,158 @@
       <div class="tl-desc">Arrives Tel Aviv 05:05 on 1 September.</div>
     </div>
   </div>
-
 </section>
 
 <hr class="divider">
 
-<!-- ═══════════════════════════════ CREW ═══════════════════════════════ -->
+<!-- CREW -->
 <section id="crew" class="fade-in">
   <p class="section-label">Who's coming</p>
   <h2 class="section-title">The <em>Crew</em></h2>
-
   <div class="crew-grid">
-    <div class="crew-card">
-      <div class="crew-avatar">A</div>
-      <div>
-        <div class="crew-name">Aviad</div>
-        <div class="crew-role">📱 Gadgets & logistics</div>
-      </div>
-    </div>
-    <div class="crew-card">
-      <div class="crew-avatar">L</div>
-      <div>
-        <div class="crew-name">Liat</div>
-        <div class="crew-role">☕ Cafés & bakeries</div>
-      </div>
-    </div>
-    <div class="crew-card">
-      <div class="crew-avatar">S</div>
-      <div>
-        <div class="crew-name">Shahar</div>
-        <div class="crew-role">✈️ Traveller</div>
-      </div>
-    </div>
-    <div class="crew-card">
-      <div class="crew-avatar">E</div>
-      <div>
-        <div class="crew-name">Ella</div>
-        <div class="crew-role">✈️ Traveller</div>
-      </div>
-    </div>
-    <div class="crew-card">
-      <div class="crew-avatar">O</div>
-      <div>
-        <div class="crew-name">Ori</div>
-        <div class="crew-role">✈️ Traveller</div>
-      </div>
-    </div>
+    <div class="crew-card"><div class="crew-avatar">A</div><div><div class="crew-name">Aviad</div><div class="crew-role">📱 Gadgets & logistics</div></div></div>
+    <div class="crew-card"><div class="crew-avatar">L</div><div><div class="crew-name">Liat</div><div class="crew-role">☕ Cafés & bakeries</div></div></div>
+    <div class="crew-card"><div class="crew-avatar">S</div><div><div class="crew-name">Shahar</div><div class="crew-role">✈️ Traveller</div></div></div>
+    <div class="crew-card"><div class="crew-avatar">E</div><div><div class="crew-name">Ella</div><div class="crew-role">✈️ Traveller</div></div></div>
+    <div class="crew-card"><div class="crew-avatar">O</div><div><div class="crew-name">Ori</div><div class="crew-role">✈️ Traveller</div></div></div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════ PRACTICAL ═══════════════════════════════ -->
+<!-- PRACTICAL -->
 <div class="info-section" id="practical">
   <div class="info-inner">
     <p class="section-label" style="color:var(--gold-light)">Good to know</p>
     <h2 class="section-title" style="color:#fff">Practical <em style="color:var(--gold-light)">Info</em></h2>
-
     <div class="info-grid">
-
-      <div class="info-card">
-        <div class="info-card-icon">💷</div>
-        <div class="info-card-title">Money</div>
-        <div class="info-card-body">
-          Currency is <strong>British Pound (GBP)</strong>. Cards and contactless/Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🌤️</div>
-        <div class="info-card-title">Weather in August</div>
-        <div class="info-card-body">
-          Lake District: <strong>14–20°C</strong>, can be rainy — pack layers and a waterproof jacket. London: <strong>18–24°C</strong>, generally pleasant.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🚗</div>
-        <div class="info-card-title">Getting Around</div>
-        <div class="info-card-body">
-          <strong>7-seater SUV</strong> for the whole trip. Drive on the left — narrow country roads in the Lakes and Dales.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🆘</div>
-        <div class="info-card-title">Emergency</div>
-        <div class="info-card-body">
-          <strong>999</strong> — police, fire, ambulance<br>
-          <strong>111</strong> — NHS non-emergency medical<br>
-          <strong>112</strong> — EU emergency (also works)
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">📱</div>
-        <div class="info-card-title">Wi-Fi & SIM</div>
-        <div class="info-card-body">
-          Good 4G/5G coverage in cities and towns. Rural Lakes/Dales can have patchy signal. Download offline maps before you go.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🗣️</div>
-        <div class="info-card-title">Useful English</div>
-        <div class="info-card-body">
-          <strong>Cheers</strong> = Thanks<br>
-          <strong>Brilliant</strong> = Great<br>
-          <strong>Queuing</strong> = Sacred ritual<br>
-          <strong>Biscuit</strong> = Cookie
-        </div>
-      </div>
-
+      <div class="info-card"><div class="info-card-icon">💷</div><div class="info-card-title">Money</div><div class="info-card-body">Currency is <strong>British Pound (GBP)</strong>. Cards and Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.</div></div>
+      <div class="info-card"><div class="info-card-icon">🌤️</div><div class="info-card-title">Weather in August</div><div class="info-card-body">Lake District: <strong>14–20°C</strong>, can be rainy — pack layers and a waterproof. London: <strong>18–24°C</strong>, generally pleasant.</div></div>
+      <div class="info-card"><div class="info-card-icon">🚗</div><div class="info-card-title">Getting Around</div><div class="info-card-body"><strong>7-seater SUV</strong> for the whole trip. Drive on the left — narrow country roads in the Lakes and Dales.</div></div>
+      <div class="info-card"><div class="info-card-icon">🆘</div><div class="info-card-title">Emergency</div><div class="info-card-body"><strong>999</strong> — police, fire, ambulance<br><strong>111</strong> — NHS non-emergency medical</div></div>
+      <div class="info-card"><div class="info-card-icon">📱</div><div class="info-card-title">Wi-Fi & SIM</div><div class="info-card-body">Good 4G/5G in cities. Rural Lakes/Dales can be patchy — download offline maps before you go.</div></div>
+      <div class="info-card"><div class="info-card-icon">🗣️</div><div class="info-card-title">Useful English</div><div class="info-card-body"><strong>Cheers</strong> = Thanks<br><strong>Brilliant</strong> = Great<br><strong>Queuing</strong> = Sacred ritual<br><strong>Biscuit</strong> = Cookie</div></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
 <footer class="footer">
   Made with ♥ for the <strong>Hevrony family</strong> · England 2026 🏴󠁧󠁢󠁥󠁮󠁧󠁿<br>
   <span style="opacity:0.5; font-size:11px; margin-top:6px; display:block;">More details to be added as the trip takes shape</span>
 </footer>
 
+<!-- Google Maps -->
 <script>
-  // Scroll-triggered fade-in
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  function initMap() {
+    const mapEl = document.getElementById('map');
 
+    const stops = [
+      { lat: 51.8763, lng: -0.3717, label: '✈️ Luton Airport', color: '#1a3a2a', day: 'Day 1 · 24 Aug', desc: 'Arrive LY311 at 08:15. Pick up 7-seater SUV.' },
+      { lat: 54.4609, lng: -3.0886, label: '🏔️ Lake District', color: '#4a8c5c', day: 'Days 1–3 · 24–26 Aug', desc: 'Hikes, lakes, and dramatic fells. Based near Windermere / Ambleside.' },
+      { lat: 54.0924, lng: -2.1388, label: '🐑 Yorkshire Dales', color: '#c9a84c', day: 'Days 4–6 · 27–29 Aug', desc: 'Rolling dales, market towns, castles and abbeys.' },
+      { lat: 51.5074, lng: -0.1278, label: '🏙️ London', color: '#c0392b', day: 'Days 7–8 · 30–31 Aug', desc: 'Two nights in London. Sightseeing, culture, and dinner.' },
+      { lat: 51.4700, lng: -0.4543, label: '✈️ Heathrow Airport', color: '#1a3a2a', day: 'Day 8 · 31 Aug', desc: 'Depart LY318 at 22:10 from Terminal 4.' },
+    ];
+
+    const bounds = new google.maps.LatLngBounds();
+    stops.forEach(s => bounds.extend({ lat: s.lat, lng: s.lng }));
+
+    const map = new google.maps.Map(mapEl, {
+      zoom: 6,
+      center: { lat: 53.5, lng: -1.8 },
+      mapTypeId: 'roadmap',
+      styles: [
+        { elementType: 'geometry', stylers: [{ color: '#e8e4da' }] },
+        { elementType: 'labels.text.fill', stylers: [{ color: '#3a3a3a' }] },
+        { elementType: 'labels.text.stroke', stylers: [{ color: '#f5f0e8' }] },
+        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#a8c5da' }] },
+        { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#4a7a9b' }] },
+        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#fff' }] },
+        { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#d8d0c0' }] },
+        { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#f5c842' }] },
+        { featureType: 'road.highway', elementType: 'geometry.stroke', stylers: [{ color: '#e0a800' }] },
+        { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#c8dfc8' }] },
+        { featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+        { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+        { featureType: 'administrative.country', elementType: 'geometry.stroke', stylers: [{ color: '#aaa' }] },
+      ],
+      disableDefaultUI: false,
+      zoomControl: true,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+    });
+
+    // Draw route line
+    const routePath = new google.maps.Polyline({
+      path: stops.map(s => ({ lat: s.lat, lng: s.lng })),
+      geodesic: true,
+      strokeColor: '#4a8c5c',
+      strokeOpacity: 0.7,
+      strokeWeight: 3,
+      icons: [{
+        icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#2d5a3d' },
+        offset: '50%',
+        repeat: '120px'
+      }]
+    });
+    routePath.setMap(map);
+
+    // Add markers + info windows
+    const infoWindow = new google.maps.InfoWindow();
+
+    stops.forEach((stop, i) => {
+      const marker = new google.maps.Marker({
+        position: { lat: stop.lat, lng: stop.lng },
+        map,
+        title: stop.label,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: i === 0 || i === stops.length - 1 ? 10 : 12,
+          fillColor: stop.color,
+          fillOpacity: 1,
+          strokeColor: '#fff',
+          strokeWeight: 2.5,
+        },
+        label: {
+          text: String(i + 1),
+          color: '#fff',
+          fontSize: '11px',
+          fontWeight: 'bold',
+          fontFamily: 'DM Sans, sans-serif',
+        },
+        zIndex: 10 + i,
+      });
+
+      marker.addListener('click', () => {
+        infoWindow.setContent(`
+          <div style="font-family:'DM Sans',sans-serif; padding:4px 2px; min-width:180px;">
+            <div style="font-size:16px; font-weight:600; color:#1a3a2a; margin-bottom:3px;">${stop.label}</div>
+            <div style="font-size:11px; color:#4a8c5c; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">${stop.day}</div>
+            <div style="font-size:13px; color:#555; line-height:1.5;">${stop.desc}</div>
+          </div>
+        `);
+        infoWindow.open(map, marker);
+      });
+    });
+
+    map.fitBounds(bounds, { top: 60, bottom: 60, left: 40, right: 40 });
+  }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp-r7HEdMRDOK0NQQW7ogG9Vd-SoudaRU&callback=initMap">
+</script>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // Nav active state
   const sections = document.querySelectorAll('section[id], div[id]');
   const navLinks = document.querySelectorAll('.nav-inner a');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 80) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
   });
 </script>
 
