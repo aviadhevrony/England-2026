@@ -218,6 +218,58 @@
   .crew-role { font-size: 12px; color: var(--text-light); }
 
   /* FOOTER */
+  /* CONSIDERING CARDS */
+  .consider-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 14px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .consider-card:hover {
+    border-color: var(--green-light);
+    box-shadow: 0 6px 20px rgba(26,58,42,0.1);
+    transform: translateY(-2px);
+  }
+  .consider-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .consider-body { flex: 1; }
+  .consider-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .consider-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .consider-url {
+    font-size: 11px;
+    color: var(--green-light);
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+  .consider-arrow {
+    color: var(--green-light);
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
   .footer { background: var(--green-deep); color: var(--green-pale); text-align: center; padding: 40px 24px; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); }
   .footer strong { color: var(--gold-light); }
 
@@ -316,7 +368,59 @@
     .info-section { padding: 48px 16px; }
 
     /* Footer */
-    .footer { padding: 32px 16px; }
+    /* CONSIDERING CARDS */
+  .consider-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 14px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .consider-card:hover {
+    border-color: var(--green-light);
+    box-shadow: 0 6px 20px rgba(26,58,42,0.1);
+    transform: translateY(-2px);
+  }
+  .consider-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .consider-body { flex: 1; }
+  .consider-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .consider-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .consider-url {
+    font-size: 11px;
+    color: var(--green-light);
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+  .consider-arrow {
+    color: var(--green-light);
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .footer { padding: 32px 16px; }
 
     /* Section titles */
     .section-title { font-size: 28px; margin-bottom: 24px; }
@@ -324,7 +428,59 @@
 
   /* ── SAFE AREA for iPhone notch/home bar ── */
   @supports (padding-bottom: env(safe-area-inset-bottom)) {
-    .footer { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+    /* CONSIDERING CARDS */
+  .consider-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 14px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .consider-card:hover {
+    border-color: var(--green-light);
+    box-shadow: 0 6px 20px rgba(26,58,42,0.1);
+    transform: translateY(-2px);
+  }
+  .consider-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .consider-body { flex: 1; }
+  .consider-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .consider-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .consider-url {
+    font-size: 11px;
+    color: var(--green-light);
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+  .consider-arrow {
+    color: var(--green-light);
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .footer { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
     .nav-bar { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
   }
 </style>
@@ -361,6 +517,7 @@
     <a href="#map-section">🗺️ Map</a>
     <a href="#itinerary">📅 Plan</a>
     <a href="#practical">ℹ️ Info</a>
+    <a href="#considering">🔖 Ideas</a>
     <a href="docs.html">📖 Docs</a>
   </div>
 </nav>
@@ -819,6 +976,39 @@
     </div>
   </div>
 </div>
+
+<hr class="divider">
+
+<!-- CONSIDERING -->
+<section id="considering" class="fade-in">
+  <p class="section-label">On the radar</p>
+  <h2 class="section-title">Things We're <em>Considering</em></h2>
+  <p style="color:var(--text-mid); font-size:14px; margin-bottom:28px;">Links and ideas we're thinking about — not booked yet, just saving for later.</p>
+
+  <div style="display:flex; flex-direction:column; gap:16px;">
+
+    <a class="consider-card" href="https://book.wbstudiotour.com/tickets?language_id=1" target="_blank">
+      <div class="consider-icon">⚡</div>
+      <div class="consider-body">
+        <div class="consider-title">Warner Bros. Studio Tour — The Making of Harry Potter</div>
+        <div class="consider-desc">Walk the actual sets from all 8 Harry Potter films — the Great Hall, Diagon Alley, Dumbledore's office, Platform 9¾, and the Hogwarts Express. Located in Leavesden, ~30 min from London by train + shuttle.</div>
+        <div class="consider-url">book.wbstudiotour.com</div>
+      </div>
+      <div class="consider-arrow">↗</div>
+    </a>
+
+    <a class="consider-card" href="https://www.disneytickets.co.uk/the-lion-king-musical-tickets" target="_blank">
+      <div class="consider-icon">🦁</div>
+      <div class="consider-body">
+        <div class="consider-title">The Lion King — Lyceum Theatre, West End</div>
+        <div class="consider-desc">Disney's landmark West End musical — spectacular costumes, puppetry, and iconic Elton John & Hans Zimmer score. Running continuously at the Lyceum Theatre in London's West End. Already in the plan for Thursday evening.</div>
+        <div class="consider-url">disneytickets.co.uk</div>
+      </div>
+      <div class="consider-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
 
 <footer class="footer">
   Made with ♥ for the <strong>Hevrony family</strong> · England 2026 🏴󠁧󠁢󠁥󠁮󠁧󠁿<br>
