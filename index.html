@@ -544,7 +544,7 @@
   <div class="map-header">
     <p class="section-label">The route</p>
     <h2 class="section-title">The <em>Journey</em></h2>
-    <p style="color:var(--text-mid); font-size:14px; margin-bottom: 0;">From Luton airport north to the Lakes, across to Yorkshire, then down to London and out through Heathrow.</p>
+    <p style="color:var(--text-mid); font-size:14px; margin-bottom: 0;">From Luton airport north to the Lakes, across to Yorkshire, then down to London and out through Heathrow. <strong style="color:var(--green-light)">Tap any pin to load the driving route.</strong></p>
   </div>
   <div id="map"></div>
   <div class="map-legend">
@@ -1090,68 +1090,63 @@
       fullscreenControl: true,
     });
 
-    // Draw routes: Directions API for driving legs, dashed polyline for flights
+    // Draw routes: flights as dashed lines immediately, driving routes loaded on-demand
     const directionsService = new google.maps.DirectionsService();
-    let driveIndex = 0;
+    const driveRenderers = {}; // keyed by stop index
 
+    function loadDrivingRoute(i) {
+      if (driveRenderers[i]) return; // already loaded
+      driveRenderers[i] = 'loading';
+      directionsService.route({
+        origin: { lat: stops[i].lat, lng: stops[i].lng },
+        destination: { lat: stops[i+1].lat, lng: stops[i+1].lng },
+        travelMode: google.maps.TravelMode.DRIVING,
+      }, function(result, status) {
+        if (status === 'OK') {
+          const renderer = new google.maps.DirectionsRenderer({
+            map: map,
+            suppressMarkers: true,
+            suppressInfoWindows: true,
+            polylineOptions: {
+              strokeColor: '#2d5a3d',
+              strokeOpacity: 0.8,
+              strokeWeight: 4,
+              icons: [{
+                icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a3a2a', fillColor: '#1a3a2a', fillOpacity: 1 },
+                offset: '50%'
+              }]
+            }
+          });
+          renderer.setDirections(result);
+          driveRenderers[i] = renderer;
+          // Remove the placeholder arrow line
+          if (placeholderLines[i]) { placeholderLines[i].setMap(null); delete placeholderLines[i]; }
+        }
+      });
+    }
+
+    // Draw flight lines immediately + placeholder dashed green arrows for driving legs
+    const placeholderLines = {};
     for (let i = 0; i < stops.length - 1; i++) {
-      const seg = stops[i];
-      const isFlight = seg.legToNext === 'flight';
-
+      const isFlight = stops[i].legToNext === 'flight';
       if (isFlight) {
-        // Dashed blue straight line for flights
-        const flightLine = new google.maps.Polyline({
-          path: [
-            { lat: stops[i].lat, lng: stops[i].lng },
-            { lat: stops[i+1].lat, lng: stops[i+1].lng }
-          ],
-          geodesic: true,
-          strokeColor: '#1a5fa8',
-          strokeOpacity: 0,
-          strokeWeight: 2,
+        new google.maps.Polyline({
+          path: [{ lat: stops[i].lat, lng: stops[i].lng }, { lat: stops[i+1].lat, lng: stops[i+1].lng }],
+          geodesic: true, strokeColor: '#1a5fa8', strokeOpacity: 0, strokeWeight: 2,
           icons: [
             { icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.85, strokeColor: '#1a5fa8', scale: 3 }, offset: '0', repeat: '14px' },
             { icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a5fa8', fillColor: '#1a5fa8', fillOpacity: 1 }, offset: '50%' }
-          ]
+          ], map: map
         });
-        flightLine.setMap(map);
       } else {
-        // Real driving route via Directions API — staggered with delay to avoid rate limiting
-        (function(fromStop, toStop, delayMs) {
-          setTimeout(function() {
-            directionsService.route({
-              origin: { lat: fromStop.lat, lng: fromStop.lng },
-              destination: { lat: toStop.lat, lng: toStop.lng },
-              travelMode: google.maps.TravelMode.DRIVING,
-            }, function(result, status) {
-              if (status === 'OK') {
-                const renderer = new google.maps.DirectionsRenderer({
-                  map: map,
-                  suppressMarkers: true,
-                  suppressInfoWindows: true,
-                  polylineOptions: {
-                    strokeColor: '#2d5a3d',
-                    strokeOpacity: 0.75,
-                    strokeWeight: 4,
-                    icons: [{
-                      icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a3a2a', fillColor: '#1a3a2a', fillOpacity: 1 },
-                      offset: '50%'
-                    }]
-                  }
-                });
-                renderer.setDirections(result);
-              } else {
-                // Fallback to straight line if Directions fails
-                const fallback = new google.maps.Polyline({
-                  path: [{ lat: fromStop.lat, lng: fromStop.lng }, { lat: toStop.lat, lng: toStop.lng }],
-                  geodesic: true, strokeColor: '#4a8c5c', strokeOpacity: 0.75, strokeWeight: 3
-                });
-                fallback.setMap(map);
-              }
-            });
-          }, delayMs);
-        })(stops[i], stops[i+1], driveIndex * 1200);
-        driveIndex++;
+        // Dashed placeholder until user clicks the pin
+        placeholderLines[i] = new google.maps.Polyline({
+          path: [{ lat: stops[i].lat, lng: stops[i].lng }, { lat: stops[i+1].lat, lng: stops[i+1].lng }],
+          geodesic: true, strokeColor: '#4a8c5c', strokeOpacity: 0, strokeWeight: 2,
+          icons: [
+            { icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.5, strokeColor: '#4a8c5c', scale: 2 }, offset: '0', repeat: '10px' }
+          ], map: map
+        });
       }
     }
 
@@ -1226,7 +1221,14 @@
         zIndex: 10 + i,
       });
 
+      // Load driving route on marker click
+      const stopIndex = i;
       marker.addListener('click', () => {
+        // Load route FROM this stop (if it's a driving leg)
+        if (stops[stopIndex].legToNext === 'drive') loadDrivingRoute(stopIndex);
+        // Also load route TO this stop (leg from previous stop)
+        if (stopIndex > 0 && stops[stopIndex-1].legToNext === 'drive') loadDrivingRoute(stopIndex-1);
+
         infoWindow.setContent(`
           <div style="font-family:'DM Sans',sans-serif; padding:4px 2px; min-width:180px;">
             <div style="font-size:16px; font-weight:600; color:#1a3a2a; margin-bottom:3px;">${stop.label}</div>
