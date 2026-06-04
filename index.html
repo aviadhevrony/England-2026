@@ -1355,7 +1355,46 @@
           </div>
         </div>
       </div>
-      <div class="info-card"><div class="info-card-icon">🌤️</div><div class="info-card-title">Weather in August</div><div class="info-card-body">Lake District: <strong>14–20°C</strong>, can be rainy — pack layers and a waterproof. London: <strong>18–24°C</strong>, generally pleasant.</div></div>
+      <div class="info-card" style="grid-column: 1 / -1;">
+        <div class="info-card-icon">🌤️</div>
+        <div class="info-card-title">Weather Forecast</div>
+        <div class="info-card-body">
+          <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:16px; margin-top:8px;">
+
+            <div>
+              <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">🏔️ Lake District</div>
+              <iframe src="https://wttr.in/Lake+District,England?format=4&lang=en" 
+                style="border:none; background:transparent; color:#fff; width:100%; height:22px; overflow:hidden; font-size:13px;"
+                scrolling="no"></iframe>
+              <iframe src="https://wttr.in/Lake+District,England?m1&lang=en" 
+                style="border:none; background:transparent; width:100%; height:180px; overflow:hidden; margin-top:6px; border-radius:8px;"
+                scrolling="no"></iframe>
+            </div>
+
+            <div>
+              <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">🌾 Yorkshire Moors</div>
+              <iframe src="https://wttr.in/Yorkshire+Moors,England?format=4&lang=en"
+                style="border:none; background:transparent; width:100%; height:22px; overflow:hidden; font-size:13px;"
+                scrolling="no"></iframe>
+              <iframe src="https://wttr.in/Yorkshire+Moors,England?m1&lang=en"
+                style="border:none; background:transparent; width:100%; height:180px; overflow:hidden; margin-top:6px; border-radius:8px;"
+                scrolling="no"></iframe>
+            </div>
+
+            <div>
+              <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">🏙️ London</div>
+              <iframe src="https://wttr.in/London,England?format=4&lang=en"
+                style="border:none; background:transparent; width:100%; height:22px; overflow:hidden; font-size:13px;"
+                scrolling="no"></iframe>
+              <iframe src="https://wttr.in/London,England?m1&lang=en"
+                style="border:none; background:transparent; width:100%; height:180px; overflow:hidden; margin-top:6px; border-radius:8px;"
+                scrolling="no"></iframe>
+            </div>
+
+          </div>
+          <div style="font-size:11px; color:var(--green-pale); opacity:0.5; margin-top:12px;">Live forecast via wttr.in · Updates on each page load</div>
+        </div>
+      </div>
       <div class="info-card"><div class="info-card-icon">🆘</div><div class="info-card-title">Emergency</div><div class="info-card-body"><strong>999</strong> — police, fire, ambulance<br><strong>111</strong> — NHS non-emergency medical</div></div>
       <div class="info-card" style="grid-column: 1 / -1;"><div class="info-card-icon">🗣️</div><div class="info-card-title">Speaking British — Enthusiasm Edition</div><div class="info-card-body" style="column-count:2; column-gap:24px;"><strong>Blinding</strong> — absolutely brilliant<br><strong>Cracking</strong> — excellent, top quality<br><strong>Smashing</strong> — fantastic<br><strong>Stonking</strong> — impressively good<br><strong>Belter</strong> — outstandingly good<br><strong>Corking</strong> — excellent (old-fashioned, very charming)<br><strong>Brill</strong> — short for brilliant, used constantly<br><strong>Proper</strong> — as in "that's proper good"<br><strong>Mint</strong> — Northern slang for excellent<br><strong>Lush</strong> — lovely/gorgeous (Wales &amp; Southwest)<br><strong>Fit</strong> — attractive (not athletic — will confuse you)<br><strong>Well wicked</strong> — very good (London slang)<br><strong>Sorted</strong> — everything is under control<br><strong>Ace</strong> — great, wonderful</div></div>
     </div>
