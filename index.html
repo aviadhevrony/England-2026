@@ -372,6 +372,7 @@
   .wx-day-name { font-size: 10px; color: var(--green-pale); opacity: 0.7; margin-bottom: 3px; }
   .wx-day-icon { font-size: 18px; margin-bottom: 2px; }
   .wx-day-temp { font-size: 12px; font-weight: 600; color: #fff; }
+  .wx-day-low { font-size: 11px; color: var(--green-pale); opacity: 0.6; margin-top: 1px; }
   .wx-loading { color: var(--green-pale); opacity: 0.5; font-size: 13px; padding-top: 20px; }
   .wx-error { color: var(--gold-light); font-size: 12px; opacity: 0.7; }
 
@@ -727,6 +728,7 @@
   .wx-day-name { font-size: 10px; color: var(--green-pale); opacity: 0.7; margin-bottom: 3px; }
   .wx-day-icon { font-size: 18px; margin-bottom: 2px; }
   .wx-day-temp { font-size: 12px; font-weight: 600; color: #fff; }
+  .wx-day-low { font-size: 11px; color: var(--green-pale); opacity: 0.6; margin-top: 1px; }
   .wx-loading { color: var(--green-pale); opacity: 0.5; font-size: 13px; padding-top: 20px; }
   .wx-error { color: var(--gold-light); font-size: 12px; opacity: 0.7; }
 
@@ -992,6 +994,7 @@
   .wx-day-name { font-size: 10px; color: var(--green-pale); opacity: 0.7; margin-bottom: 3px; }
   .wx-day-icon { font-size: 18px; margin-bottom: 2px; }
   .wx-day-temp { font-size: 12px; font-weight: 600; color: #fff; }
+  .wx-day-low { font-size: 11px; color: var(--green-pale); opacity: 0.6; margin-top: 1px; }
   .wx-loading { color: var(--green-pale); opacity: 0.5; font-size: 13px; padding-top: 20px; }
   .wx-error { color: var(--gold-light); font-size: 12px; opacity: 0.7; }
 
@@ -1913,17 +1916,24 @@ async function loadWeather() {
 
       if (cur.cod !== 200) throw new Error(cur.message);
 
-      // Get one reading per day (noon) for next 5 days
+      // Collect all readings per day, compute min/max and pick noon icon
       const days = {};
       for (const item of fore.list) {
         const d = new Date(item.dt * 1000);
         const key = d.toDateString();
+        if (!days[key]) days[key] = { items: [], noonItem: null };
+        days[key].items.push(item);
         const hour = d.getHours();
-        if (!days[key] || Math.abs(hour - 12) < Math.abs(new Date(days[key].dt*1000).getHours() - 12)) {
-          days[key] = item;
+        if (!days[key].noonItem || Math.abs(hour - 12) < Math.abs(new Date(days[key].noonItem.dt*1000).getHours() - 12)) {
+          days[key].noonItem = item;
         }
       }
-      const dayList = Object.values(days).slice(0, 5);
+      const dayList = Object.values(days).slice(0, 5).map(day => ({
+        dt: day.noonItem.dt,
+        icon: day.noonItem.weather[0].icon,
+        min: Math.round(Math.min(...day.items.map(i => i.main.temp_min))),
+        max: Math.round(Math.max(...day.items.map(i => i.main.temp_max))),
+      }));
 
       el.innerHTML = `
         <div class="wx-location">${loc.name}</div>
@@ -1939,8 +1949,9 @@ async function loadWeather() {
           ${dayList.map(d => `
             <div class="wx-day">
               <div class="wx-day-name">${shortDay(d.dt)}</div>
-              <div class="wx-day-icon">${owmIcon(d.weather[0].icon)}</div>
-              <div class="wx-day-temp">${Math.round(d.main.temp)}°</div>
+              <div class="wx-day-icon">${owmIcon(d.icon)}</div>
+              <div class="wx-day-temp">${d.max}°</div>
+              <div class="wx-day-low">${d.min}°</div>
             </div>
           `).join('')}
         </div>`;
