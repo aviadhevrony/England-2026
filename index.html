@@ -1090,27 +1090,65 @@
       fullscreenControl: true,
     });
 
-    // Draw per-segment lines: dashed blue for flights, solid green for driving
+    // Draw routes: Directions API for driving legs, dashed polyline for flights
+    const directionsService = new google.maps.DirectionsService();
+
     for (let i = 0; i < stops.length - 1; i++) {
       const seg = stops[i];
       const isFlight = seg.legToNext === 'flight';
-      const polyline = new google.maps.Polyline({
-        path: [
-          { lat: stops[i].lat, lng: stops[i].lng },
-          { lat: stops[i+1].lat, lng: stops[i+1].lng }
-        ],
-        geodesic: true,
-        strokeColor: isFlight ? '#1a5fa8' : '#4a8c5c',
-        strokeOpacity: isFlight ? 0 : 0.75,
-        strokeWeight: isFlight ? 2 : 3,
-        icons: isFlight ? [
-          { icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.85, strokeColor: '#1a5fa8', scale: 3 }, offset: '0', repeat: '14px' },
-          { icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a5fa8', fillColor: '#1a5fa8', fillOpacity: 1 }, offset: '50%' }
-        ] : [
-          { icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#2d5a3d', fillColor: '#2d5a3d', fillOpacity: 1 }, offset: '50%' }
-        ]
-      });
-      polyline.setMap(map);
+
+      if (isFlight) {
+        // Dashed blue straight line for flights
+        const flightLine = new google.maps.Polyline({
+          path: [
+            { lat: stops[i].lat, lng: stops[i].lng },
+            { lat: stops[i+1].lat, lng: stops[i+1].lng }
+          ],
+          geodesic: true,
+          strokeColor: '#1a5fa8',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          icons: [
+            { icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.85, strokeColor: '#1a5fa8', scale: 3 }, offset: '0', repeat: '14px' },
+            { icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a5fa8', fillColor: '#1a5fa8', fillOpacity: 1 }, offset: '50%' }
+          ]
+        });
+        flightLine.setMap(map);
+      } else {
+        // Real driving route via Directions API
+        (function(fromStop, toStop) {
+          directionsService.route({
+            origin: { lat: fromStop.lat, lng: fromStop.lng },
+            destination: { lat: toStop.lat, lng: toStop.lng },
+            travelMode: google.maps.TravelMode.DRIVING,
+          }, function(result, status) {
+            if (status === 'OK') {
+              const renderer = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: true,
+                suppressInfoWindows: true,
+                polylineOptions: {
+                  strokeColor: '#2d5a3d',
+                  strokeOpacity: 0.75,
+                  strokeWeight: 4,
+                  icons: [{
+                    icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a3a2a', fillColor: '#1a3a2a', fillOpacity: 1 },
+                    offset: '50%'
+                  }]
+                }
+              });
+              renderer.setDirections(result);
+            } else {
+              // Fallback to straight line if Directions fails
+              const fallback = new google.maps.Polyline({
+                path: [{ lat: fromStop.lat, lng: fromStop.lng }, { lat: toStop.lat, lng: toStop.lng }],
+                geodesic: true, strokeColor: '#4a8c5c', strokeOpacity: 0.75, strokeWeight: 3
+              });
+              fallback.setMap(map);
+            }
+          });
+        })(stops[i], stops[i+1]);
+      }
     }
 
     // ── Lake District National Park polygon ──
