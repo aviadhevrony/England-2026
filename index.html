@@ -397,6 +397,8 @@
     <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div> London</div>
     <div class="legend-item"><div style="width:32px; border-top: 3px solid #4a8c5c;"></div> Driving</div>
     <div class="legend-item"><div style="width:32px; border-top: 2.5px dashed #1a5fa8;"></div> ✈️ Flight</div>
+    <div class="legend-item"><div style="width:14px;height:14px;background:rgba(74,140,92,0.2);border:2px solid #4a8c5c;border-radius:3px;"></div> Lake District NP</div>
+    <div class="legend-item"><div style="width:14px;height:14px;background:rgba(201,168,76,0.2);border:2px solid #c9a84c;border-radius:3px;"></div> Yorkshire Moors</div>
   </div>
 </div>
 
@@ -890,6 +892,51 @@
       });
       polyline.setMap(map);
     }
+
+    // ── Lake District National Park polygon ──
+    const lakeDistrictCoords = [
+      {lat:54.7154,lng:-3.4516},{lat:54.7153,lng:-3.3491},{lat:54.6929,lng:-3.2497},
+      {lat:54.6686,lng:-3.1866},{lat:54.6700,lng:-3.1060},{lat:54.6398,lng:-3.0603},
+      {lat:54.5993,lng:-3.0441},{lat:54.5570,lng:-2.9973},{lat:54.5127,lng:-2.9626},
+      {lat:54.4730,lng:-2.9285},{lat:54.4287,lng:-2.9119},{lat:54.3920,lng:-2.9134},
+      {lat:54.3491,lng:-2.9591},{lat:54.3111,lng:-3.0083},{lat:54.2894,lng:-3.0764},
+      {lat:54.2743,lng:-3.1512},{lat:54.2698,lng:-3.2340},{lat:54.2880,lng:-3.3166},
+      {lat:54.3177,lng:-3.3987},{lat:54.3330,lng:-3.4629},{lat:54.3440,lng:-3.5423},
+      {lat:54.3630,lng:-3.5872},{lat:54.4020,lng:-3.6117},{lat:54.4450,lng:-3.6007},
+      {lat:54.4887,lng:-3.5749},{lat:54.5280,lng:-3.5630},{lat:54.5702,lng:-3.5539},
+      {lat:54.6133,lng:-3.5394},{lat:54.6524,lng:-3.5167},{lat:54.6840,lng:-3.4889},
+      {lat:54.7154,lng:-3.4516}
+    ];
+
+    const lakeDistrictPolygon = new google.maps.Polygon({
+      paths: lakeDistrictCoords,
+      strokeColor: '#4a8c5c',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#4a8c5c',
+      fillOpacity: 0.12,
+      map: map
+    });
+
+    // Yorkshire Moors polygon
+    const yorkshireMoorsCoords = [
+      {lat:54.5600,lng:-1.1500},{lat:54.5500,lng:-0.9800},{lat:54.5100,lng:-0.8200},
+      {lat:54.4500,lng:-0.7200},{lat:54.3800,lng:-0.6300},{lat:54.3000,lng:-0.5900},
+      {lat:54.2200,lng:-0.6500},{lat:54.1700,lng:-0.7800},{lat:54.1500,lng:-0.9500},
+      {lat:54.1600,lng:-1.1200},{lat:54.1900,lng:-1.2800},{lat:54.2400,lng:-1.4000},
+      {lat:54.3100,lng:-1.4500},{lat:54.3900,lng:-1.4200},{lat:54.4600,lng:-1.3500},
+      {lat:54.5200,lng:-1.2800},{lat:54.5600,lng:-1.1500}
+    ];
+
+    const yorkshireMoorsPolygon = new google.maps.Polygon({
+      paths: yorkshireMoorsCoords,
+      strokeColor: '#c9a84c',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#c9a84c',
+      fillOpacity: 0.12,
+      map: map
+    });
 
     // Add markers + info windows
     const infoWindow = new google.maps.InfoWindow();
