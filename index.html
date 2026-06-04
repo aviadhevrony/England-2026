@@ -1092,6 +1092,7 @@
 
     // Draw routes: Directions API for driving legs, dashed polyline for flights
     const directionsService = new google.maps.DirectionsService();
+    let driveIndex = 0;
 
     for (let i = 0; i < stops.length - 1; i++) {
       const seg = stops[i];
@@ -1115,39 +1116,42 @@
         });
         flightLine.setMap(map);
       } else {
-        // Real driving route via Directions API
-        (function(fromStop, toStop) {
-          directionsService.route({
-            origin: { lat: fromStop.lat, lng: fromStop.lng },
-            destination: { lat: toStop.lat, lng: toStop.lng },
-            travelMode: google.maps.TravelMode.DRIVING,
-          }, function(result, status) {
-            if (status === 'OK') {
-              const renderer = new google.maps.DirectionsRenderer({
-                map: map,
-                suppressMarkers: true,
-                suppressInfoWindows: true,
-                polylineOptions: {
-                  strokeColor: '#2d5a3d',
-                  strokeOpacity: 0.75,
-                  strokeWeight: 4,
-                  icons: [{
-                    icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a3a2a', fillColor: '#1a3a2a', fillOpacity: 1 },
-                    offset: '50%'
-                  }]
-                }
-              });
-              renderer.setDirections(result);
-            } else {
-              // Fallback to straight line if Directions fails
-              const fallback = new google.maps.Polyline({
-                path: [{ lat: fromStop.lat, lng: fromStop.lng }, { lat: toStop.lat, lng: toStop.lng }],
-                geodesic: true, strokeColor: '#4a8c5c', strokeOpacity: 0.75, strokeWeight: 3
-              });
-              fallback.setMap(map);
-            }
-          });
-        })(stops[i], stops[i+1]);
+        // Real driving route via Directions API — staggered with delay to avoid rate limiting
+        (function(fromStop, toStop, delayMs) {
+          setTimeout(function() {
+            directionsService.route({
+              origin: { lat: fromStop.lat, lng: fromStop.lng },
+              destination: { lat: toStop.lat, lng: toStop.lng },
+              travelMode: google.maps.TravelMode.DRIVING,
+            }, function(result, status) {
+              if (status === 'OK') {
+                const renderer = new google.maps.DirectionsRenderer({
+                  map: map,
+                  suppressMarkers: true,
+                  suppressInfoWindows: true,
+                  polylineOptions: {
+                    strokeColor: '#2d5a3d',
+                    strokeOpacity: 0.75,
+                    strokeWeight: 4,
+                    icons: [{
+                      icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: '#1a3a2a', fillColor: '#1a3a2a', fillOpacity: 1 },
+                      offset: '50%'
+                    }]
+                  }
+                });
+                renderer.setDirections(result);
+              } else {
+                // Fallback to straight line if Directions fails
+                const fallback = new google.maps.Polyline({
+                  path: [{ lat: fromStop.lat, lng: fromStop.lng }, { lat: toStop.lat, lng: toStop.lng }],
+                  geodesic: true, strokeColor: '#4a8c5c', strokeOpacity: 0.75, strokeWeight: 3
+                });
+                fallback.setMap(map);
+              }
+            });
+          }, delayMs);
+        })(stops[i], stops[i+1], driveIndex * 400);
+        driveIndex++;
       }
     }
 
