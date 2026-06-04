@@ -1873,26 +1873,36 @@ async function loadWeather() {
 document.addEventListener('DOMContentLoaded', loadWeather);
 
 (function fetchGBPRate() {
-  fetch('https://api.frankfurter.dev/v2/rates?base=GBP&quotes=ILS')
-    .then(r => r.json())
-    .then(data => {
-      const rate = data.rates && data.rates.ILS;
-      if (!rate) return;
-      document.getElementById('rate-value').textContent = rate.toFixed(2);
-      // Examples
-      const examples = [5, 10, 20, 50, 100].map(gbp =>
-        `£${gbp} = ₪${(gbp * rate).toFixed(0)}`
-      ).join(' · ');
-      document.getElementById('rate-examples').textContent = examples;
-      // Date
-      const d = new Date(data.date || Date.now());
-      document.getElementById('rate-meta').textContent =
-        'Updated ' + d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
-    })
-    .catch(() => {
-      document.getElementById('rate-value').textContent = '—';
-      document.getElementById('rate-meta').textContent = 'Rate unavailable';
-    });
+  // Try multiple free APIs in sequence until one works
+  const rateApis = [
+    () => fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/gbp.json')
+            .then(r => r.json()).then(d => ({ rate: d.gbp.ils, date: d.date })),
+    () => fetch('https://latest.currency-api.pages.dev/v1/currencies/gbp.json')
+            .then(r => r.json()).then(d => ({ rate: d.gbp.ils, date: d.date })),
+    () => fetch('https://open.er-api.com/v6/latest/GBP')
+            .then(r => r.json()).then(d => ({ rate: d.rates.ILS, date: d.time_last_update_utc })),
+  ];
+
+  async function fetchRate() {
+    for (const api of rateApis) {
+      try {
+        const { rate, date } = await api();
+        if (!rate) continue;
+        document.getElementById('rate-value').textContent = rate.toFixed(2);
+        const examples = [5, 10, 20, 50, 100].map(gbp =>
+          `£${gbp} = ₪${(gbp * rate).toFixed(0)}`
+        ).join(' · ');
+        document.getElementById('rate-examples').textContent = examples;
+        const d = new Date(date || Date.now());
+        document.getElementById('rate-meta').textContent =
+          'Updated ' + d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+        return; // success
+      } catch(e) { continue; }
+    }
+    document.getElementById('rate-value').textContent = '—';
+    document.getElementById('rate-meta').textContent = 'Rate unavailable';
+  }
+  fetchRate();
 })();
 </script>
 </body>
