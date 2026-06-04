@@ -1931,8 +1931,8 @@ async function loadWeather() {
       const dayList = Object.values(days).slice(0, 5).map(day => ({
         dt: day.noonItem.dt,
         icon: day.noonItem.weather[0].icon,
-        min: Math.round(Math.min(...day.items.map(i => i.main.temp_min))),
-        max: Math.round(Math.max(...day.items.map(i => i.main.temp_max))),
+        min: Math.round(Math.min(...day.items.map(i => i.main.temp))),
+        max: Math.round(Math.max(...day.items.map(i => i.main.temp))),
       }));
 
       el.innerHTML = `
