@@ -357,57 +357,27 @@
 <nav class="nav-bar">
   <div class="nav-inner">
     <a href="#top">🏠 Home</a>
-    <a href="#flights">✈️ Flights</a>
+    <a href="#crew">👥 Crew</a>
     <a href="#map-section">🗺️ Map</a>
     <a href="#itinerary">📅 Plan</a>
-    <a href="#crew">👥 Crew</a>
     <a href="#practical">ℹ️ Info</a>
     <a href="docs.html">📖 Docs</a>
   </div>
 </nav>
 
-<!-- FLIGHTS -->
-<section id="flights" class="fade-in">
-  <p class="section-label">Getting there</p>
-  <h2 class="section-title">The <em>Flights</em></h2>
-  <div class="flights-grid">
-    <div class="flight-card">
-      <p class="flight-direction">✈ Outbound — Sunday 24 August</p>
-      <div class="flight-route">
-        <div class="flight-airport">
-          <div class="flight-iata">TLV</div>
-          <div class="flight-city">Tel Aviv · Ben Gurion · T3</div>
-        </div>
-        <div class="flight-arrow">
-          <div class="flight-line">✈</div>
-          <div class="flight-number">LY 311</div>
-        </div>
-        <div class="flight-airport" style="text-align:right">
-          <div class="flight-iata">LTN</div>
-          <div class="flight-city">London Luton</div>
-        </div>
-      </div>
-      <div class="flight-times">
-        <div class="flight-time-block">
-          <div class="flight-time-label">Departs</div>
-          <div class="flight-time-value">04:50</div>
-          <div class="flight-time-date">24 Aug 2026</div>
-        </div>
-        <div class="flight-time-block" style="text-align:right">
-          <div class="flight-time-label">Arrives</div>
-          <div class="flight-time-value">08:15</div>
-          <div class="flight-time-date">24 Aug 2026</div>
-        </div>
-      </div>
-      <div class="flight-meta">
-        <span class="flight-badge">⏱ 5h 25m</span>
-        <span class="flight-badge">💺 Economy Classic</span>
-        <span class="flight-badge">🧳 1 bag each</span>
-        <span class="flight-badge">5 passengers</span>
-      </div>
-    </div>
+<!-- CREW -->
+<section id="crew" class="fade-in">
+  <p class="section-label">Who's coming</p>
+  <h2 class="section-title">The <em>Crew</em></h2>
+  <div class="crew-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div class="crew-card"><div class="crew-avatar"><img src="images/aviad.jpg" alt="Aviad"></div><div><div class="crew-name">Aviad</div><div class="crew-role">📱 Gadgets & Logistics</div></div></div>
+    <div class="crew-card"><div class="crew-avatar"><img src="images/liat.jpg" alt="Liat"></div><div><div class="crew-name">Liat</div><div class="crew-role">🗺️ Tour guide</div></div></div>
   </div>
-  <div class="note-card"><strong>📍 Note:</strong> You arrive into <strong>Luton</strong> and depart from <strong>Heathrow</strong> — return flight details are in Day 8 of the itinerary below.</div>
+  <div class="crew-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:16px;">
+    <div class="crew-card" style="min-width:unset;"><div class="crew-avatar"><img src="images/shahar.jpg" alt="Shahar"></div><div><div class="crew-name">Shahar</div><div class="crew-role">🎓 Celebrating graduation</div></div></div>
+    <div class="crew-card" style="min-width:unset;"><div class="crew-avatar"><img src="images/ella.jpg" alt="Ella"></div><div><div class="crew-name">Ella</div><div class="crew-role">👗 Fashion & Cocktails</div></div></div>
+    <div class="crew-card" style="min-width:unset;"><div class="crew-avatar"><img src="images/ori.jpg" alt="Ori"></div><div><div class="crew-name">Ori</div><div class="crew-role">👁️ Our eyes in Gaza</div></div></div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -450,8 +420,42 @@
   <div class="timeline fade-in">
     <div class="tl-item highlight">
       <div class="tl-time">04:50 → 08:15</div>
-      <div class="tl-title">Flight LY311 · Tel Aviv → Luton</div>
-      <div class="tl-desc">Arrive London Luton. Collect bags, pick up the 7-seater rental van.</div>
+      <div class="tl-title">✈️ Flight LY311 · Tel Aviv → Luton</div>
+    </div>
+    <div class="flight-card" style="margin: 8px 0 20px 0;">
+      <p class="flight-direction">✈ Outbound — Monday 24 August</p>
+      <div class="flight-route">
+        <div class="flight-airport">
+          <div class="flight-iata">TLV</div>
+          <div class="flight-city">Tel Aviv · Ben Gurion · T3</div>
+        </div>
+        <div class="flight-arrow">
+          <div class="flight-line">✈</div>
+          <div class="flight-number">LY 311</div>
+        </div>
+        <div class="flight-airport" style="text-align:right">
+          <div class="flight-iata">LTN</div>
+          <div class="flight-city">London Luton</div>
+        </div>
+      </div>
+      <div class="flight-times">
+        <div class="flight-time-block">
+          <div class="flight-time-label">Departs</div>
+          <div class="flight-time-value">04:50</div>
+          <div class="flight-time-date">24 Aug 2026</div>
+        </div>
+        <div class="flight-time-block" style="text-align:right">
+          <div class="flight-time-label">Arrives</div>
+          <div class="flight-time-value">08:15</div>
+          <div class="flight-time-date">24 Aug 2026</div>
+        </div>
+      </div>
+      <div class="flight-meta">
+        <span class="flight-badge">⏱ 5h 25m</span>
+        <span class="flight-badge">💺 Economy Classic</span>
+        <span class="flight-badge">🧳 1 bag each</span>
+        <span class="flight-badge">5 passengers · YI8VR4</span>
+      </div>
     </div>
     <div class="tl-item highlight">
       <div class="tl-time">09:00</div>
@@ -796,20 +800,7 @@
 
 <hr class="divider">
 
-<!-- CREW -->
-<section id="crew" class="fade-in">
-  <p class="section-label">Who's coming</p>
-  <h2 class="section-title">The <em>Crew</em></h2>
-  <div class="crew-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-    <div class="crew-card"><div class="crew-avatar"><img src="images/aviad.jpg" alt="Aviad"></div><div><div class="crew-name">Aviad</div><div class="crew-role">📱 Gadgets & Logistics</div></div></div>
-    <div class="crew-card"><div class="crew-avatar"><img src="images/liat.jpg" alt="Liat"></div><div><div class="crew-name">Liat</div><div class="crew-role">🗺️ Tour guide</div></div></div>
-  </div>
-  <div class="crew-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:16px;">
-    <div class="crew-card" style="min-width:unset;"><div class="crew-avatar"><img src="images/shahar.jpg" alt="Shahar"></div><div><div class="crew-name">Shahar</div><div class="crew-role">🎓 Celebrating graduation</div></div></div>
-    <div class="crew-card" style="min-width:unset;"><div class="crew-avatar"><img src="images/ella.jpg" alt="Ella"></div><div><div class="crew-name">Ella</div><div class="crew-role">👗 Fashion & Cocktails</div></div></div>
-    <div class="crew-card" style="min-width:unset;"><div class="crew-avatar"><img src="images/ori.jpg" alt="Ori"></div><div><div class="crew-name">Ori</div><div class="crew-role">👁️ Our eyes in Gaza</div></div></div>
-  </div>
-</section>
+
 
 <!-- PRACTICAL -->
 <div class="info-section" id="practical">
