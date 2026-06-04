@@ -290,6 +290,29 @@
   .todo-item.done .todo-sub { opacity: 0.6; }
 
 
+  /* RATE PILLS */
+  .rate-pill {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--green-pale);
+    font-weight: 500;
+  }
+  .rate-pill span {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 3px;
+  }
+  @media (max-width: 600px) {
+    .rate-pill { font-size: 11px; }
+    .rate-pill span { font-size: 14px; }
+  }
+
   /* WEATHER CARDS */
   .wx-card {
     background: rgba(255,255,255,0.06);
@@ -622,6 +645,29 @@
   }
   .todo-delete-btn:hover { opacity: 1; color: #c0392b; }
 
+  /* RATE PILLS */
+  .rate-pill {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--green-pale);
+    font-weight: 500;
+  }
+  .rate-pill span {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 3px;
+  }
+  @media (max-width: 600px) {
+    .rate-pill { font-size: 11px; }
+    .rate-pill span { font-size: 14px; }
+  }
+
   /* WEATHER CARDS */
   .wx-card {
     background: rgba(255,255,255,0.06);
@@ -863,6 +909,29 @@
     margin-top: 2px;
   }
   .todo-delete-btn:hover { opacity: 1; color: #c0392b; }
+
+  /* RATE PILLS */
+  .rate-pill {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--green-pale);
+    font-weight: 500;
+  }
+  .rate-pill span {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 3px;
+  }
+  @media (max-width: 600px) {
+    .rate-pill { font-size: 11px; }
+    .rate-pill span { font-size: 14px; }
+  }
 
   /* WEATHER CARDS */
   .wx-card {
@@ -1526,18 +1595,29 @@
     <p class="section-label" style="color:var(--gold-light)">Good to know</p>
     <h2 class="section-title" style="color:#fff">Practical <em style="color:var(--gold-light)">Info</em></h2>
     <div class="info-grid">
-      <div class="info-card">
+      <div class="info-card" style="grid-column: 1 / -1;">
         <div class="info-card-icon">💷</div>
         <div class="info-card-title">Money</div>
         <div class="info-card-body">
           Currency is <strong>British Pound (GBP)</strong>. Cards and Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.
           <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.1);">
-            <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Live Rate</div>
-            <div id="gbp-rate" style="font-size:22px; font-family:var(--font-display); font-weight:700; color:#fff; line-height:1.2;">
-              £1 = <span id="rate-value">…</span> ₪
+            <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+              <div>
+                <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Live Rate</div>
+                <div id="gbp-rate" style="font-size:36px; font-family:var(--font-display); font-weight:700; color:#fff; line-height:1;">
+                  £1 = <span id="rate-value">…</span> ₪
+                </div>
+              </div>
+              <div id="rate-meta" style="font-size:11px; color:var(--green-pale); opacity:0.6;"></div>
             </div>
-            <div id="rate-meta" style="font-size:11px; color:var(--green-pale); opacity:0.7; margin-top:4px;"></div>
-            <div style="font-size:12px; color:var(--green-pale); margin-top:8px; opacity:0.85;" id="rate-examples"></div>
+            <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:8px;" id="rate-examples-grid">
+              <div class="rate-pill">£5<span></span></div>
+              <div class="rate-pill">£10<span></span></div>
+              <div class="rate-pill">£20<span></span></div>
+              <div class="rate-pill">£50<span></span></div>
+              <div class="rate-pill">£100<span></span></div>
+            </div>
+            <div style="display:none" id="rate-examples"></div>
           </div>
         </div>
       </div>
@@ -1889,9 +1969,13 @@ document.addEventListener('DOMContentLoaded', loadWeather);
         const { rate, date } = await api();
         if (!rate) continue;
         document.getElementById('rate-value').textContent = rate.toFixed(2);
-        const examples = [5, 10, 20, 50, 100].map(gbp =>
-          `£${gbp} = ₪${(gbp * rate).toFixed(0)}`
-        ).join(' · ');
+        // Populate conversion pills
+        const amounts = [5, 10, 20, 50, 100];
+        const pills = document.querySelectorAll('.rate-pill span');
+        pills.forEach((pill, i) => {
+          pill.textContent = '₪' + (amounts[i] * rate).toFixed(0);
+        });
+        const examples = amounts.map(gbp => `£${gbp} = ₪${(gbp * rate).toFixed(0)}`).join(' · ');
         document.getElementById('rate-examples').textContent = examples;
         const d = new Date(date || Date.now());
         document.getElementById('rate-meta').textContent =
