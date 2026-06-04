@@ -1340,7 +1340,21 @@
     <p class="section-label" style="color:var(--gold-light)">Good to know</p>
     <h2 class="section-title" style="color:#fff">Practical <em style="color:var(--gold-light)">Info</em></h2>
     <div class="info-grid">
-      <div class="info-card"><div class="info-card-icon">💷</div><div class="info-card-title">Money</div><div class="info-card-body">Currency is <strong>British Pound (GBP)</strong>. Cards and Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.</div></div>
+      <div class="info-card">
+        <div class="info-card-icon">💷</div>
+        <div class="info-card-title">Money</div>
+        <div class="info-card-body">
+          Currency is <strong>British Pound (GBP)</strong>. Cards and Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.
+          <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.1);">
+            <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;">Live Rate</div>
+            <div id="gbp-rate" style="font-size:22px; font-family:var(--font-display); font-weight:700; color:#fff; line-height:1.2;">
+              £1 = <span id="rate-value">…</span> ₪
+            </div>
+            <div id="rate-meta" style="font-size:11px; color:var(--green-pale); opacity:0.7; margin-top:4px;"></div>
+            <div style="font-size:12px; color:var(--green-pale); margin-top:8px; opacity:0.85;" id="rate-examples"></div>
+          </div>
+        </div>
+      </div>
       <div class="info-card"><div class="info-card-icon">🌤️</div><div class="info-card-title">Weather in August</div><div class="info-card-body">Lake District: <strong>14–20°C</strong>, can be rainy — pack layers and a waterproof. London: <strong>18–24°C</strong>, generally pleasant.</div></div>
       <div class="info-card"><div class="info-card-icon">🆘</div><div class="info-card-title">Emergency</div><div class="info-card-body"><strong>999</strong> — police, fire, ambulance<br><strong>111</strong> — NHS non-emergency medical</div></div>
       <div class="info-card" style="grid-column: 1 / -1;"><div class="info-card-icon">🗣️</div><div class="info-card-title">Speaking British — Enthusiasm Edition</div><div class="info-card-body" style="column-count:2; column-gap:24px;"><strong>Blinding</strong> — absolutely brilliant<br><strong>Cracking</strong> — excellent, top quality<br><strong>Smashing</strong> — fantastic<br><strong>Stonking</strong> — impressively good<br><strong>Belter</strong> — outstandingly good<br><strong>Corking</strong> — excellent (old-fashioned, very charming)<br><strong>Brill</strong> — short for brilliant, used constantly<br><strong>Proper</strong> — as in "that's proper good"<br><strong>Mint</strong> — Northern slang for excellent<br><strong>Lush</strong> — lovely/gorgeous (Wales &amp; Southwest)<br><strong>Fit</strong> — attractive (not athletic — will confuse you)<br><strong>Well wicked</strong> — very good (London slang)<br><strong>Sorted</strong> — everything is under control<br><strong>Ace</strong> — great, wonderful</div></div>
@@ -1580,6 +1594,31 @@ function toggleLondonMap(btn) {
 }
 
 
+</script>
+
+<script>
+(function fetchGBPRate() {
+  fetch('https://api.frankfurter.dev/v2/rates?base=GBP&quotes=ILS')
+    .then(r => r.json())
+    .then(data => {
+      const rate = data.rates && data.rates.ILS;
+      if (!rate) return;
+      document.getElementById('rate-value').textContent = rate.toFixed(2);
+      // Examples
+      const examples = [5, 10, 20, 50, 100].map(gbp =>
+        `£${gbp} = ₪${(gbp * rate).toFixed(0)}`
+      ).join(' · ');
+      document.getElementById('rate-examples').textContent = examples;
+      // Date
+      const d = new Date(data.date || Date.now());
+      document.getElementById('rate-meta').textContent =
+        'Updated ' + d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+    })
+    .catch(() => {
+      document.getElementById('rate-value').textContent = '—';
+      document.getElementById('rate-meta').textContent = 'Rate unavailable';
+    });
+})();
 </script>
 </body>
 </html>
