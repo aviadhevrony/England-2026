@@ -218,6 +218,75 @@
   .crew-role { font-size: 12px; color: var(--text-light); }
 
   /* FOOTER */
+  /* TODO LIST */
+  .todo-list { display: flex; flex-direction: column; gap: 2px; }
+  .todo-item {
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 12px;
+    transition: border-color 0.2s, background 0.2s;
+    overflow: hidden;
+  }
+  .todo-item.done {
+    background: rgba(74,140,92,0.05);
+    border-color: rgba(74,140,92,0.25);
+  }
+  .todo-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .todo-check { display: none; }
+  .todo-checkmark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--cream-dark);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .todo-checkmark::after {
+    content: '';
+    display: none;
+    width: 6px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+  }
+  .todo-item.done .todo-checkmark {
+    background: var(--green-light);
+    border-color: var(--green-light);
+  }
+  .todo-item.done .todo-checkmark::after { display: block; }
+  .todo-content { flex: 1; }
+  .todo-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .todo-item.done .todo-title {
+    color: var(--text-light);
+    text-decoration: line-through;
+  }
+  .todo-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .todo-item.done .todo-sub { opacity: 0.6; }
+
   /* CONSIDERING CARDS */
   .consider-card {
     display: flex;
@@ -368,7 +437,76 @@
     .info-section { padding: 48px 16px; }
 
     /* Footer */
-    /* CONSIDERING CARDS */
+    /* TODO LIST */
+  .todo-list { display: flex; flex-direction: column; gap: 2px; }
+  .todo-item {
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 12px;
+    transition: border-color 0.2s, background 0.2s;
+    overflow: hidden;
+  }
+  .todo-item.done {
+    background: rgba(74,140,92,0.05);
+    border-color: rgba(74,140,92,0.25);
+  }
+  .todo-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .todo-check { display: none; }
+  .todo-checkmark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--cream-dark);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .todo-checkmark::after {
+    content: '';
+    display: none;
+    width: 6px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+  }
+  .todo-item.done .todo-checkmark {
+    background: var(--green-light);
+    border-color: var(--green-light);
+  }
+  .todo-item.done .todo-checkmark::after { display: block; }
+  .todo-content { flex: 1; }
+  .todo-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .todo-item.done .todo-title {
+    color: var(--text-light);
+    text-decoration: line-through;
+  }
+  .todo-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .todo-item.done .todo-sub { opacity: 0.6; }
+
+  /* CONSIDERING CARDS */
   .consider-card {
     display: flex;
     align-items: flex-start;
@@ -428,7 +566,76 @@
 
   /* ── SAFE AREA for iPhone notch/home bar ── */
   @supports (padding-bottom: env(safe-area-inset-bottom)) {
-    /* CONSIDERING CARDS */
+    /* TODO LIST */
+  .todo-list { display: flex; flex-direction: column; gap: 2px; }
+  .todo-item {
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 12px;
+    transition: border-color 0.2s, background 0.2s;
+    overflow: hidden;
+  }
+  .todo-item.done {
+    background: rgba(74,140,92,0.05);
+    border-color: rgba(74,140,92,0.25);
+  }
+  .todo-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .todo-check { display: none; }
+  .todo-checkmark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--cream-dark);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .todo-checkmark::after {
+    content: '';
+    display: none;
+    width: 6px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+  }
+  .todo-item.done .todo-checkmark {
+    background: var(--green-light);
+    border-color: var(--green-light);
+  }
+  .todo-item.done .todo-checkmark::after { display: block; }
+  .todo-content { flex: 1; }
+  .todo-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .todo-item.done .todo-title {
+    color: var(--text-light);
+    text-decoration: line-through;
+  }
+  .todo-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .todo-item.done .todo-sub { opacity: 0.6; }
+
+  /* CONSIDERING CARDS */
   .consider-card {
     display: flex;
     align-items: flex-start;
@@ -517,6 +724,7 @@
     <a href="#map-section">🗺️ Map</a>
     <a href="#itinerary">📅 Plan</a>
     <a href="#practical">ℹ️ Info</a>
+    <a href="#todo">✅ To-Do</a>
     <a href="#considering">🔖 Ideas</a>
     <a href="docs.html">📖 Docs</a>
   </div>
@@ -959,26 +1167,6 @@
 
 <hr class="divider">
 
-
-
-<!-- PRACTICAL -->
-<div class="info-section" id="practical">
-  <div class="info-inner">
-    <p class="section-label" style="color:var(--gold-light)">Good to know</p>
-    <h2 class="section-title" style="color:#fff">Practical <em style="color:var(--gold-light)">Info</em></h2>
-    <div class="info-grid">
-      <div class="info-card"><div class="info-card-icon">💷</div><div class="info-card-title">Money</div><div class="info-card-body">Currency is <strong>British Pound (GBP)</strong>. Cards and Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.</div></div>
-      <div class="info-card"><div class="info-card-icon">🌤️</div><div class="info-card-title">Weather in August</div><div class="info-card-body">Lake District: <strong>14–20°C</strong>, can be rainy — pack layers and a waterproof. London: <strong>18–24°C</strong>, generally pleasant.</div></div>
-      <div class="info-card"><div class="info-card-icon">🚗</div><div class="info-card-title">Getting Around</div><div class="info-card-body"><strong>7-seater SUV</strong> for the whole trip. Drive on the left — narrow country roads in the Lakes and Dales.</div></div>
-      <div class="info-card"><div class="info-card-icon">🆘</div><div class="info-card-title">Emergency</div><div class="info-card-body"><strong>999</strong> — police, fire, ambulance<br><strong>111</strong> — NHS non-emergency medical</div></div>
-      <div class="info-card"><div class="info-card-icon">📱</div><div class="info-card-title">Wi-Fi & SIM</div><div class="info-card-body">Good 4G/5G in cities. Rural Lakes/Dales can be patchy — download offline maps before you go.</div></div>
-      <div class="info-card"><div class="info-card-icon">🗣️</div><div class="info-card-title">Useful English</div><div class="info-card-body"><strong>Cheers</strong> = Thanks<br><strong>Brilliant</strong> = Great<br><strong>Queuing</strong> = Sacred ritual<br><strong>Biscuit</strong> = Cookie</div></div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
 <!-- CONSIDERING -->
 <section id="considering" class="fade-in">
   <p class="section-label">On the radar</p>
@@ -1039,6 +1227,102 @@
 
   </div>
 </section>
+
+
+<hr class="divider">
+
+<!-- TODO -->
+<section id="todo" class="fade-in">
+  <p class="section-label">Before we go</p>
+  <h2 class="section-title">To-Do <em>List</em></h2>
+  <p style="color:var(--text-mid); font-size:14px; margin-bottom:28px;">Check things off as they get sorted. Progress is saved in your browser.</p>
+
+  <div class="todo-list" id="todo-list">
+
+    <div class="todo-item" data-id="flights">
+      <label class="todo-label">
+        <input type="checkbox" class="todo-check" onchange="saveTodo(this)">
+        <span class="todo-checkmark"></span>
+        <div class="todo-content">
+          <div class="todo-title">✈️ Flights</div>
+          <div class="todo-sub">EL AL LY311 (TLV→LTN) &amp; LY318 (LHR→TLV) · Booking YI8VR4</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="todo-item" data-id="eta">
+      <label class="todo-label">
+        <input type="checkbox" class="todo-check" onchange="saveTodo(this)">
+        <span class="todo-checkmark"></span>
+        <div class="todo-content">
+          <div class="todo-title">🇬🇧 Apply for UK ETA — all 5 travellers</div>
+          <div class="todo-sub">£10 per person · Apply at <a href="https://www.gov.uk/guidance/apply-for-an-electronic-travel-authorisation-eta" target="_blank" style="color:var(--green-light)">gov.uk/eta ↗</a> · See full instructions in <a href="docs.html#eta" target="_blank" style="color:var(--green-light)">Docs ↗</a></div>
+        </div>
+      </label>
+    </div>
+
+    <div class="todo-item" data-id="car">
+      <label class="todo-label">
+        <input type="checkbox" class="todo-check" onchange="saveTodo(this)">
+        <span class="todo-checkmark"></span>
+        <div class="todo-content">
+          <div class="todo-title">🚐 Car Rental</div>
+          <div class="todo-sub">Enterprise · Conf #2116503768 · Peugeot 5008 Automatic · Pickup Luton 09:00 · Drop-off Milton Keynes by 17:00</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="todo-item" data-id="hotels">
+      <label class="todo-label">
+        <input type="checkbox" class="todo-check" onchange="saveTodo(this)">
+        <span class="todo-checkmark"></span>
+        <div class="todo-content">
+          <div class="todo-title">🏨 Book Hotels</div>
+          <div class="todo-sub">Lake District (Mon–Wed, 2 nights) · Yorkshire (Wed, 1 night) · London (Thu–Sun, 4 nights)</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="todo-item" data-id="shabbat">
+      <label class="todo-label">
+        <input type="checkbox" class="todo-check" onchange="saveTodo(this)">
+        <span class="todo-checkmark"></span>
+        <div class="todo-content">
+          <div class="todo-title">🕍 Shabbat — Where?</div>
+          <div class="todo-sub">Shabbat falls Fri 28 Aug (eve) – Sat 29 Aug · Chabad Belgravia: 11 Grosvenor Place, SW1X 7HH · <a href="mailto:JewishBelgravia@gmail.com" style="color:var(--green-light)">JewishBelgravia@gmail.com</a></div>
+        </div>
+      </label>
+    </div>
+
+    <div class="todo-item" data-id="shows">
+      <label class="todo-label">
+        <input type="checkbox" class="todo-check" onchange="saveTodo(this)">
+        <span class="todo-checkmark"></span>
+        <div class="todo-content">
+          <div class="todo-title">🎭 Book Performances</div>
+          <div class="todo-sub">The Lion King — Thu 27 Aug · Jesus Christ Superstar — Sun 30 Aug</div>
+        </div>
+      </label>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRACTICAL -->
+<div class="info-section" id="practical">
+  <div class="info-inner">
+    <p class="section-label" style="color:var(--gold-light)">Good to know</p>
+    <h2 class="section-title" style="color:#fff">Practical <em style="color:var(--gold-light)">Info</em></h2>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-card-icon">💷</div><div class="info-card-title">Money</div><div class="info-card-body">Currency is <strong>British Pound (GBP)</strong>. Cards and Apple Pay accepted everywhere. Worth having £50–100 cash for rural areas.</div></div>
+      <div class="info-card"><div class="info-card-icon">🌤️</div><div class="info-card-title">Weather in August</div><div class="info-card-body">Lake District: <strong>14–20°C</strong>, can be rainy — pack layers and a waterproof. London: <strong>18–24°C</strong>, generally pleasant.</div></div>
+      <div class="info-card"><div class="info-card-icon">🚗</div><div class="info-card-title">Getting Around</div><div class="info-card-body"><strong>7-seater van</strong> for the first 4 days. Drive on the left — narrow country roads in the Lakes. London by Tube, bus, and boat.</div></div>
+      <div class="info-card"><div class="info-card-icon">🆘</div><div class="info-card-title">Emergency</div><div class="info-card-body"><strong>999</strong> — police, fire, ambulance<br><strong>111</strong> — NHS non-emergency medical</div></div>
+      <div class="info-card"><div class="info-card-icon">📱</div><div class="info-card-title">Wi-Fi & SIM</div><div class="info-card-body">Good 4G/5G in cities. Rural Lakes/Dales can be patchy — download offline maps before you go.</div></div>
+      <div class="info-card"><div class="info-card-icon">🗣️</div><div class="info-card-title">Useful English</div><div class="info-card-body"><strong>Cheers</strong> = Thanks<br><strong>Brilliant</strong> = Great<br><strong>Queuing</strong> = Sacred ritual<br><strong>Biscuit</strong> = Cookie</div></div>
+    </div>
+  </div>
+</div>
 
 <footer class="footer">
   Made with ♥ for the <strong>Hevrony family</strong> · England 2026 🏴󠁧󠁢󠁥󠁮󠁧󠁿<br>
@@ -1270,6 +1554,28 @@ function toggleLondonMap(btn) {
   embed.style.display = visible ? 'none' : 'block';
   btn.textContent = visible ? '▼ Show map' : '▲ Hide map';
 }
+
+// TODO checkbox persistence
+function saveTodo(checkbox) {
+  const item = checkbox.closest('.todo-item');
+  const id = item.dataset.id;
+  const done = checkbox.checked;
+  localStorage.setItem('todo_' + id, done ? '1' : '0');
+  item.classList.toggle('done', done);
+}
+
+function loadTodos() {
+  document.querySelectorAll('.todo-item').forEach(item => {
+    const id = item.dataset.id;
+    const saved = localStorage.getItem('todo_' + id);
+    if (saved === '1') {
+      item.classList.add('done');
+      item.querySelector('.todo-check').checked = true;
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadTodos);
 </script>
 </body>
 </html>
