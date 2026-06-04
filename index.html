@@ -89,6 +89,100 @@
   .flight-meta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
   .flight-badge { background: rgba(255,255,255,0.1); border-radius: 100px; padding: 4px 10px; font-size: 11px; color: var(--green-pale); }
 
+  /* RESERVATION CARDS (car rental, hotels) */
+  .res-card {
+    background: var(--green-deep);
+    color: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 12px 0 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .res-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .res-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .res-card-icon { font-size: 22px; }
+  .res-card-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .res-card-subtitle {
+    font-size: 11px;
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .res-card-conf {
+    font-size: 11px;
+    color: var(--green-pale);
+    opacity: 0.7;
+    margin-left: auto;
+    font-family: var(--font-body);
+    white-space: nowrap;
+  }
+  .res-card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .res-card-field {}
+  .res-card-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 3px;
+  }
+  .res-card-value {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .res-card-value small {
+    display: block;
+    font-size: 11px;
+    color: var(--green-pale);
+    opacity: 0.8;
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .res-card-notes {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--green-pale);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .res-card-notes strong { color: #fff; }
+  .res-card-notes .warn { color: var(--gold-light); }
+  @media (max-width: 600px) {
+    .res-card-grid { grid-template-columns: 1fr; gap: 10px; }
+  }
+
   /* ITINERARY */
   .day-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; margin-top: 40px; padding-bottom: 12px; border-bottom: 2px solid var(--green-pale); }
   .day-number { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--green-deep); opacity: 0.18; line-height: 1; min-width: 52px; }
@@ -396,13 +490,38 @@
     <div class="tl-item highlight">
       <div class="tl-time">09:00</div>
       <div class="tl-title">🚐 Pick up Enterprise rental van</div>
-      <div class="tl-desc">
-        <strong>Enterprise Rent-A-Car · Confirmation #2116503768</strong><br>
-        Car Rental Village, President Way, Luton LU2 9NL · Tel: +44 1582 342660<br>
-        <strong>How to get there:</strong> Wait outside Arrivals at <strong>Bay C</strong> for the free shuttle bus to the car rental village (~5–10 min, runs every 15 min).<br>
-        <strong>Vehicle:</strong> Peugeot 5008 or Similar · <strong>Automatic</strong> · £542.40 total<br>
-        <strong>⚠️ Bring:</strong> Physical driving licence — digital not accepted. Israeli licence requires an International Driving Permit.<br>
-        <strong>Note:</strong> No damage protection included — consider Damage Waiver (£32.98/day) at the counter.
+    </div>
+    <div class="res-card">
+      <div class="res-card-header">
+        <div class="res-card-icon">🚐</div>
+        <div>
+          <div class="res-card-title">Enterprise Rent-A-Car</div>
+          <div class="res-card-subtitle">Car Rental · Pickup</div>
+        </div>
+        <div class="res-card-conf">Conf #2116503768</div>
+      </div>
+      <div class="res-card-grid">
+        <div class="res-card-field">
+          <div class="res-card-label">Pick-up</div>
+          <div class="res-card-value">Mon 24 Aug · 09:00<small>London Luton Airport (LTN)</small></div>
+        </div>
+        <div class="res-card-field">
+          <div class="res-card-label">Vehicle</div>
+          <div class="res-card-value">Peugeot 5008 or Similar<small>Automatic · £542.40 total</small></div>
+        </div>
+        <div class="res-card-field">
+          <div class="res-card-label">Address</div>
+          <div class="res-card-value">Car Rental Village<small>President Way, Luton LU2 9NL</small></div>
+        </div>
+        <div class="res-card-field">
+          <div class="res-card-label">Phone</div>
+          <div class="res-card-value">+44 1582 342660<small>Hours: 7:00 AM – 10:00 PM</small></div>
+        </div>
+      </div>
+      <div class="res-card-notes">
+        🚌 <strong>Getting there:</strong> Wait outside Arrivals at <strong>Bay C</strong> — free shuttle to car rental village (~5–10 min, every 15 min, 24hrs)<br>
+        ⚠️ <span class="warn"><strong>Bring physical driving licence</strong></span> — digital not accepted. Israeli licence requires an <strong>International Driving Permit</strong>.<br>
+        🛡️ No damage protection included — consider Damage Waiver (£32.98/day) at the counter.
       </div>
     </div>
     <div class="tl-item">
@@ -491,10 +610,36 @@
     <div class="tl-item highlight">
       <div class="tl-time">By 17:00</div>
       <div class="tl-title">🚐 Return rental van — Milton Keynes</div>
-      <div class="tl-desc">
-        <strong>Pennings Accident Repair Centre</strong><br>
-        Northfield Drive, Milton Keynes, MK15 0DQ · Tel: +44 1908 230306 · Hours: 8:00 AM–6:00 PM<br>
-        <strong>⚠️ Note:</strong> Drop-off is in <strong>Milton Keynes</strong> — then take the train to London Euston (~35 min).
+    </div>
+    <div class="res-card">
+      <div class="res-card-header">
+        <div class="res-card-icon">🚐</div>
+        <div>
+          <div class="res-card-title">Enterprise Rent-A-Car</div>
+          <div class="res-card-subtitle">Car Rental · Drop-off</div>
+        </div>
+        <div class="res-card-conf">Conf #2116503768</div>
+      </div>
+      <div class="res-card-grid">
+        <div class="res-card-field">
+          <div class="res-card-label">Drop-off</div>
+          <div class="res-card-value">Thu 27 Aug · by 17:00<small>Milton Keynes</small></div>
+        </div>
+        <div class="res-card-field">
+          <div class="res-card-label">Address</div>
+          <div class="res-card-value">Pennings Accident Repair Centre<small>Northfield Drive, MK15 0DQ</small></div>
+        </div>
+        <div class="res-card-field">
+          <div class="res-card-label">Phone</div>
+          <div class="res-card-value">+44 1908 230306<small>Hours: 8:00 AM – 6:00 PM</small></div>
+        </div>
+        <div class="res-card-field">
+          <div class="res-card-label">Onward to London</div>
+          <div class="res-card-value">Train from MK Central<small>~35 min to London Euston</small></div>
+        </div>
+      </div>
+      <div class="res-card-notes">
+        ⚠️ <span class="warn"><strong>Drop-off is Milton Keynes, not London</strong></span> — allow time to return the van and get the train into the city.
       </div>
     </div>
     <div class="tl-item">
