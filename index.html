@@ -51,8 +51,8 @@
   /* NAV */
   .nav-bar { position: sticky; top: 0; z-index: 100; background: var(--green-deep); border-bottom: 1px solid rgba(255,255,255,0.1); overflow-x: auto; scrollbar-width: none; }
   .nav-bar::-webkit-scrollbar { display: none; }
-  .nav-inner { display: flex; white-space: nowrap; min-width: max-content; padding: 0 8px; }
-  .nav-inner a { display: inline-block; padding: 14px 16px; color: var(--green-pale); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .nav-inner { display: flex; white-space: nowrap; padding: 0 8px; justify-content: flex-start; }
+  .nav-inner a { display: inline-block; padding: 14px 16px; color: var(--green-pale); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
   .nav-inner a:hover, .nav-inner a.active { color: var(--gold-light); border-bottom-color: var(--gold); }
 
   /* SECTIONS */
@@ -136,11 +136,101 @@
   .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-in.visible { opacity: 1; transform: none; }
 
+
+  /* ── DESKTOP (≥1024px) ── */
+  @media (min-width: 1024px) {
+    section { max-width: 1000px; padding: 80px 48px; }
+    .map-header { max-width: 1000px; padding: 80px 48px 40px; }
+    .map-legend { max-width: 1000px; padding: 24px 48px 64px; }
+    .info-inner { max-width: 1000px; }
+    .divider { max-width: 1000px; }
+    #map { height: 600px; }
+
+    /* Hero bigger on desktop */
+    .hero-title { font-size: 96px; }
+    .hero-flag { font-size: 72px; }
+
+    /* Nav — spread out, bigger tap targets */
+    .nav-inner { justify-content: center; padding: 0 48px; min-width: unset; }
+    .nav-inner a { padding: 16px 24px; font-size: 13px; letter-spacing: 0.12em; }
+
+    /* Flights side by side on desktop */
+    .flights-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Itinerary — bigger day numbers, wider timeline */
+    .day-number { font-size: 56px; min-width: 64px; }
+    .day-title { font-size: 26px; }
+    .tl-title { font-size: 16px; }
+    .tl-desc { font-size: 14px; }
+
+    /* Info grid — 3 columns */
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+
+    /* Crew cards bigger */
+    .crew-avatar { width: 72px; height: 72px; }
+    .crew-name { font-size: 20px; }
+    .crew-role { font-size: 13px; }
+    .crew-card { padding: 20px 24px; gap: 18px; }
+  }
+
+  /* ── LARGE DESKTOP (≥1400px) ── */
+  @media (min-width: 1400px) {
+    section { max-width: 1160px; }
+    .map-header { max-width: 1160px; }
+    .map-legend { max-width: 1160px; }
+    .info-inner { max-width: 1160px; }
+    .divider { max-width: 1160px; }
+    #map { height: 680px; }
+  }
+
+  /* ── MOBILE (≤600px) ── */
   @media (max-width: 600px) {
-    section { padding: 48px 20px; }
-    #map { height: 380px; }
+    section { padding: 40px 16px; }
+    #map { height: 340px; }
+    .map-header { padding: 40px 16px 24px; }
+    .map-legend { padding: 16px 16px 40px; gap: 10px; }
+
+    /* Hero compact on mobile */
+    .hero { padding: 48px 20px 64px; min-height: 100svh; }
+    .hero-title { font-size: 52px; }
+    .hero-flag { font-size: 44px; }
+    .hero-dates { font-size: 13px; padding: 8px 18px; }
+    .hero-pill { font-size: 12px; padding: 5px 12px; }
+
+    /* Nav — scrollable, bigger touch targets */
+    .nav-bar { -webkit-overflow-scrolling: touch; }
+    .nav-inner a { padding: 15px 14px; font-size: 11px; }
+
+    /* Flights stack, smaller IATA */
     .flight-iata { font-size: 26px; }
-    .crew-card { min-width: 150px; }
+    .flight-time-value { font-size: 18px; }
+    .flight-badge { font-size: 10px; padding: 3px 8px; }
+
+    /* Itinerary */
+    .day-number { font-size: 34px; min-width: 42px; }
+    .day-title { font-size: 18px; }
+    .timeline { padding-left: 22px; }
+
+    /* Crew — full width cards on mobile */
+    .crew-card { min-width: unset; width: 100%; }
+
+    /* Info grid single column */
+    .info-grid { grid-template-columns: 1fr; }
+
+    /* Practical section padding */
+    .info-section { padding: 48px 16px; }
+
+    /* Footer */
+    .footer { padding: 32px 16px; }
+
+    /* Section titles */
+    .section-title { font-size: 28px; margin-bottom: 24px; }
+  }
+
+  /* ── SAFE AREA for iPhone notch/home bar ── */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .footer { padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+    .nav-bar { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
   }
 </style>
 </head>
