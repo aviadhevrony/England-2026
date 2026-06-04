@@ -289,54 +289,6 @@
   }
   .todo-item.done .todo-sub { opacity: 0.6; }
 
-  /* TODO ADD ROW */
-  .todo-add-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .todo-new-input {
-    flex: 1;
-    border: 1.5px solid var(--cream-dark);
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--text-dark);
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .todo-new-input:focus { border-color: var(--green-light); }
-  .todo-new-input::placeholder { color: var(--text-light); }
-  .todo-add-btn {
-    background: var(--green-deep);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 20px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.2s;
-  }
-  .todo-add-btn:hover { background: var(--green-mid); }
-  .todo-delete-btn {
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-size: 18px;
-    cursor: pointer;
-    padding: 0 4px;
-    line-height: 1;
-    opacity: 0.4;
-    transition: opacity 0.2s, color 0.2s;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .todo-delete-btn:hover { opacity: 1; color: #c0392b; }
 
   /* CONSIDERING CARDS */
   .consider-card {
@@ -877,8 +829,7 @@
     <a href="#map-section">🗺️ Map</a>
     <a href="#itinerary">📅 Plan</a>
     <a href="#practical">ℹ️ Info</a>
-    <a href="#todo">✅ To-Do</a>
-    <a href="#considering">🔖 Ideas</a>
+<a href="#considering">🔖 Ideas</a>
     <a href="docs.html">📖 Docs</a>
   </div>
 </nav>
@@ -1382,21 +1333,6 @@
 </section>
 
 
-<hr class="divider">
-
-<!-- TODO -->
-<section id="todo" class="fade-in">
-  <p class="section-label">Before we go</p>
-  <h2 class="section-title">To-Do <em>List</em></h2>
-  <p style="color:var(--text-mid); font-size:14px; margin-bottom:28px;">Check things off as they get sorted. Progress is saved in your browser.</p>
-
-  <div class="todo-list" id="todo-list"></div>
-
-  <div class="todo-add-row">
-    <input type="text" id="todo-new-input" class="todo-new-input" placeholder="Add a new task…" onkeydown="if(event.key==='Enter') addTodoItem()">
-    <button class="todo-add-btn" onclick="addTodoItem()">+ Add</button>
-  </div>
-</section>
 
 <!-- PRACTICAL -->
 <div class="info-section" id="practical">
@@ -1645,77 +1581,7 @@ function toggleLondonMap(btn) {
   btn.textContent = visible ? '▼ Show map' : '▲ Hide map';
 }
 
-// TODO — dynamic add/delete/check with localStorage
-const DEFAULT_TODOS = [
-  { id: 'flights', title: '✈️ Flights', sub: 'EL AL LY311 (TLV→LTN) & LY318 (LHR→TLV) · Booking YI8VR4' },
-  { id: 'eta',     title: '🇬🇧 Apply for UK ETA — all 5 travellers', sub: '£10 per person · gov.uk/eta' },
-  { id: 'car',     title: '🚐 Car Rental', sub: 'Enterprise · Conf #2116503768 · Peugeot 5008 Automatic · Pickup Luton 09:00 · Drop-off Milton Keynes 17:00' },
-  { id: 'hotels',  title: '🏨 Book Hotels', sub: 'Lake District (Mon–Wed) · Yorkshire (Wed) · London (Thu–Sun)' },
-  { id: 'shabbat', title: '🕍 Shabbat — Where?', sub: 'Fri 28 Aug eve – Sat 29 Aug · Chabad Belgravia: 11 Grosvenor Place SW1X 7HH' },
-  { id: 'shows',   title: '🎭 Book Performances', sub: 'The Lion King — Thu 27 Aug · Jesus Christ Superstar — Sun 30 Aug' },
-];
 
-function getTodos() {
-  try {
-    const saved = localStorage.getItem('todos_list');
-    return saved ? JSON.parse(saved) : DEFAULT_TODOS.map(t => ({ ...t, done: false }));
-  } catch(e) { return DEFAULT_TODOS.map(t => ({ ...t, done: false })); }
-}
-
-function saveTodos(todos) {
-  try { localStorage.setItem('todos_list', JSON.stringify(todos)); } catch(e) {}
-}
-
-function renderTodos() {
-  const todos = getTodos();
-  const list = document.getElementById('todo-list');
-  if (!list) return;
-  list.innerHTML = '';
-  todos.forEach((todo, idx) => {
-    const item = document.createElement('div');
-    item.className = 'todo-item' + (todo.done ? ' done' : '');
-    item.dataset.id = todo.id;
-    item.innerHTML = \`
-      <label class="todo-label">
-        <input type="checkbox" class="todo-check" \${todo.done ? 'checked' : ''} onchange="toggleTodo('\${todo.id}')">
-        <span class="todo-checkmark"></span>
-        <div class="todo-content">
-          <div class="todo-title">\${todo.title}</div>
-          \${todo.sub ? \`<div class="todo-sub">\${todo.sub}</div>\` : ''}
-        </div>
-      </label>
-      <button class="todo-delete-btn" onclick="deleteTodo('\${todo.id}')" title="Delete task">×</button>
-    \`;
-    list.appendChild(item);
-  });
-}
-
-function toggleTodo(id) {
-  const todos = getTodos();
-  const t = todos.find(t => t.id === id);
-  if (t) { t.done = !t.done; saveTodos(todos); renderTodos(); }
-}
-
-function deleteTodo(id) {
-  const todos = getTodos().filter(t => t.id !== id);
-  saveTodos(todos);
-  renderTodos();
-}
-
-function addTodoItem() {
-  const input = document.getElementById('todo-new-input');
-  const title = input.value.trim();
-  if (!title) return;
-  const todos = getTodos();
-  const id = 'custom_' + Date.now();
-  todos.push({ id, title, sub: '', done: false });
-  saveTodos(todos);
-  renderTodos();
-  input.value = '';
-  input.focus();
-}
-
-document.addEventListener('DOMContentLoaded', renderTodos);
 </script>
 </body>
 </html>
