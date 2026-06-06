@@ -1254,24 +1254,24 @@
     <div style="position:relative; display:inline-block;">
       <button class="theme-btn" onclick="toggleThemePicker()" title="Change theme">🎨</button>
       <div class="theme-picker" id="theme-picker">
-        <div class="theme-picker-title">Theme</div>
+        <div class="theme-picker-title">Choose Theme</div>
         <button class="theme-option" onclick="setTheme('default')" data-theme-opt="default">
-          <div class="theme-dot" style="background:#2d5a3d;"></div> Forest Green
+          <div class="theme-dot" style="background:#2d5a3d;"></div><span class="theme-label" data-name="Forest Green">Forest Green</span>
         </button>
         <button class="theme-option" onclick="setTheme('british')" data-theme-opt="british">
-          <div class="theme-dot" style="background:#1a2744;"></div> British Classic
+          <div class="theme-dot" style="background:#1a2744;"></div><span class="theme-label" data-name="British Classic">British Classic</span>
         </button>
         <button class="theme-option" onclick="setTheme('mediterranean')" data-theme-opt="mediterranean">
-          <div class="theme-dot" style="background:#b5451b;"></div> Mediterranean
+          <div class="theme-dot" style="background:#b5451b;"></div><span class="theme-label" data-name="Mediterranean">Mediterranean</span>
         </button>
         <button class="theme-option" onclick="setTheme('minimal')" data-theme-opt="minimal">
-          <div class="theme-dot" style="background:#6a9b6b; border-color:#aaa;"></div> Minimal Light
+          <div class="theme-dot" style="background:#4a7a4b;"></div><span class="theme-label" data-name="Minimal Light">Minimal Light</span>
         </button>
         <button class="theme-option" onclick="setTheme('dark')" data-theme-opt="dark">
-          <div class="theme-dot" style="background:#0d0d0d;"></div> Dark Mode
+          <div class="theme-dot" style="background:#111111;"></div><span class="theme-label" data-name="Dark Mode">Dark Mode</span>
         </button>
         <button class="theme-option" onclick="setTheme('lakedistrict')" data-theme-opt="lakedistrict">
-          <div class="theme-dot" style="background:#3d4f6b;"></div> Lake District
+          <div class="theme-dot" style="background:#3d4f6b;"></div><span class="theme-label" data-name="Lake District">Lake District</span>
         </button>
       </div>
     </div>
@@ -2086,20 +2086,69 @@
 
 
 <script>
-// Theme system
-function setTheme(theme) {
-  const root = document.documentElement;
-  if (theme === 'default') {
-    root.removeAttribute('data-theme');
-  } else {
-    root.setAttribute('data-theme', theme);
+// Theme system — injects CSS vars directly onto :root for maximum compatibility
+const THEMES = {
+  default: {
+    '--green-deep':'#1a3a2a','--green-mid':'#2d5a3d','--green-light':'#4a8c5c',
+    '--green-pale':'#c8dfc8','--cream':'#f5f0e8','--cream-dark':'#e8e0d0',
+    '--gold':'#c9a84c','--gold-light':'#e8c97a',
+    '--text-dark':'#1a1a1a','--text-mid':'#444','--text-light':'#888',
+    '--body-bg':'#f5f0e8','--body-color':'#1a1a1a'
+  },
+  british: {
+    '--green-deep':'#1a2744','--green-mid':'#243666','--green-light':'#c0392b',
+    '--green-pale':'#d6dff0','--cream':'#f7f5f0','--cream-dark':'#e8e4da',
+    '--gold':'#c0392b','--gold-light':'#e74c3c',
+    '--text-dark':'#1a1a2e','--text-mid':'#3a3a5c','--text-light':'#888',
+    '--body-bg':'#f7f5f0','--body-color':'#1a1a2e'
+  },
+  mediterranean: {
+    '--green-deep':'#b5451b','--green-mid':'#d4612a','--green-light':'#2980b9',
+    '--green-pale':'#fde8d8','--cream':'#fdf6ec','--cream-dark':'#f5e6d0',
+    '--gold':'#e67e22','--gold-light':'#f39c12',
+    '--text-dark':'#2c1810','--text-mid':'#5a3020','--text-light':'#999',
+    '--body-bg':'#fdf6ec','--body-color':'#2c1810'
+  },
+  minimal: {
+    '--green-deep':'#2c3e2d','--green-mid':'#3d5c3e','--green-light':'#4a7a4b',
+    '--green-pale':'#e8f0e8','--cream':'#ffffff','--cream-dark':'#f0f0f0',
+    '--gold':'#5a8a5b','--gold-light':'#7ab87b',
+    '--text-dark':'#1a1a1a','--text-mid':'#444','--text-light':'#999',
+    '--body-bg':'#ffffff','--body-color':'#1a1a1a'
+  },
+  dark: {
+    '--green-deep':'#111111','--green-mid':'#1e1e1e','--green-light':'#c9a84c',
+    '--green-pale':'#aaaaaa','--cream':'#181818','--cream-dark':'#252525',
+    '--gold':'#c9a84c','--gold-light':'#e8c97a',
+    '--text-dark':'#f0f0f0','--text-mid':'#cccccc','--text-light':'#888888',
+    '--body-bg':'#181818','--body-color':'#f0f0f0'
+  },
+  lakedistrict: {
+    '--green-deep':'#3d4f6b','--green-mid':'#4e6485','--green-light':'#7b8fa6',
+    '--green-pale':'#d4dce8','--cream':'#f2f0f5','--cream-dark':'#e0dde8',
+    '--gold':'#9b6b9b','--gold-light':'#c49bc4',
+    '--text-dark':'#1a1a2e','--text-mid':'#3a3a55','--text-light':'#888',
+    '--body-bg':'#f2f0f5','--body-color':'#1a1a2e'
   }
+};
+
+function setTheme(theme) {
+  const vars = THEMES[theme] || THEMES.default;
+  const root = document.documentElement;
+  Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  document.body.style.background = vars['--body-bg'];
+  document.body.style.color = vars['--body-color'];
   localStorage.setItem('england2026-theme', theme);
-  // Update active state
+  // Highlight active button
   document.querySelectorAll('[data-theme-opt]').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.themeOpt === theme);
+    const isActive = btn.dataset.themeOpt === theme;
+    btn.style.background = isActive ? 'rgba(255,255,255,0.18)' : '';
+    btn.style.color = isActive ? '#fff' : '';
+    btn.style.fontWeight = isActive ? '700' : '';
+    // Add checkmark
+    const label = btn.querySelector('.theme-label');
+    if (label) label.textContent = (isActive ? '✓ ' : '') + label.dataset.name;
   });
-  // Close picker
   document.getElementById('theme-picker').classList.remove('open');
 }
 
@@ -2107,14 +2156,12 @@ function toggleThemePicker() {
   document.getElementById('theme-picker').classList.toggle('open');
 }
 
-// Close picker when clicking outside
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.theme-btn') && !e.target.closest('.theme-picker')) {
     document.getElementById('theme-picker').classList.remove('open');
   }
 });
 
-// Load saved theme on page load
 (function() {
   const saved = localStorage.getItem('england2026-theme') || 'default';
   setTheme(saved);
