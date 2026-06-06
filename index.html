@@ -1253,7 +1253,7 @@
     <a href="docs.html">📖 Docs</a>
     <div style="position:relative; display:inline-block;">
       <button class="theme-btn" onclick="toggleThemePicker()" title="Change theme">🎨</button>
-      <div class="theme-picker" id="theme-picker">
+      <div class="theme-picker" id="theme-picker" style="left:0; right:auto;">
         <div class="theme-picker-title">Choose Theme</div>
         <button class="theme-option" onclick="setTheme('default')" data-theme-opt="default">
           <div class="theme-dot" style="background:#2d5a3d;"></div><span class="theme-label" data-name="Forest Green">Forest Green</span>
@@ -2118,9 +2118,9 @@ const THEMES = {
   },
   dark: {
     '--green-deep':'#111111','--green-mid':'#1e1e1e','--green-light':'#c9a84c',
-    '--green-pale':'#aaaaaa','--cream':'#181818','--cream-dark':'#252525',
+    '--green-pale':'#aaaaaa','--cream':'#181818','--cream-dark':'#2a2a2a',
     '--gold':'#c9a84c','--gold-light':'#e8c97a',
-    '--text-dark':'#f0f0f0','--text-mid':'#cccccc','--text-light':'#888888',
+    '--text-dark':'#f0f0f0','--text-mid':'#cccccc','--text-light':'#999999',
     '--body-bg':'#181818','--body-color':'#f0f0f0'
   },
   lakedistrict: {
@@ -2138,6 +2138,28 @@ function setTheme(theme) {
   Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
   document.body.style.background = vars['--body-bg'];
   document.body.style.color = vars['--body-color'];
+  // Extra overrides for dark mode
+  const isDark = theme === 'dark';
+  const styleId = 'dynamic-theme-overrides';
+  let styleEl = document.getElementById(styleId);
+  if (!styleEl) { styleEl = document.createElement('style'); styleEl.id = styleId; document.head.appendChild(styleEl); }
+  styleEl.textContent = isDark ? `
+    .crew-card, .consider-card, .toc, .info-box, .rate-pill { background: #1e1e1e !important; border-color: #333 !important; color: #ccc !important; }
+    .crew-name, .tl-title, .day-title, .section-title, .todo-title, .consider-title { color: #f0f0f0 !important; }
+    .tl-desc, .tl-time, .day-date, .day-sub, .section-label, .todo-sub, .consider-desc { color: #bbb !important; }
+    .day-number { color: #555 !important; }
+    .timeline::before { background: #333 !important; }
+    .tl-item::before, .tl-item.highlight::before { border-color: #181818 !important; }
+    .divider { border-color: #333 !important; }
+    .coming-soon { background: #1e1e1e !important; border-color: #333 !important; color: #aaa !important; }
+    .note-card { background: #1e1e1e !important; border-color: #444 !important; color: #ccc !important; }
+    .day-header { border-color: #333 !important; }
+    .crew-role { color: #999 !important; }
+    .res-card-conf { color: #888 !important; }
+    strong { color: #f0f0f0 !important; }
+    a { color: #c9a84c !important; }
+    .tl-link { color: #c9a84c !important; }
+  ` : '';
   localStorage.setItem('england2026-theme', theme);
   // Highlight active button
   document.querySelectorAll('[data-theme-opt]').forEach(btn => {
