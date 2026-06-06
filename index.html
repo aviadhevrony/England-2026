@@ -1251,6 +1251,30 @@
     <a href="#practical">ℹ️ Info</a>
 <a href="#considering">🔖 Ideas</a>
     <a href="docs.html">📖 Docs</a>
+    <div style="position:relative; display:inline-block;">
+      <button class="theme-btn" onclick="toggleThemePicker()" title="Change theme">🎨</button>
+      <div class="theme-picker" id="theme-picker">
+        <div class="theme-picker-title">Theme</div>
+        <button class="theme-option" onclick="setTheme('default')" data-theme-opt="default">
+          <div class="theme-dot" style="background:#2d5a3d;"></div> Forest Green
+        </button>
+        <button class="theme-option" onclick="setTheme('british')" data-theme-opt="british">
+          <div class="theme-dot" style="background:#1a2744;"></div> British Classic
+        </button>
+        <button class="theme-option" onclick="setTheme('mediterranean')" data-theme-opt="mediterranean">
+          <div class="theme-dot" style="background:#b5451b;"></div> Mediterranean
+        </button>
+        <button class="theme-option" onclick="setTheme('minimal')" data-theme-opt="minimal">
+          <div class="theme-dot" style="background:#6a9b6b; border-color:#aaa;"></div> Minimal Light
+        </button>
+        <button class="theme-option" onclick="setTheme('dark')" data-theme-opt="dark">
+          <div class="theme-dot" style="background:#0d0d0d;"></div> Dark Mode
+        </button>
+        <button class="theme-option" onclick="setTheme('lakedistrict')" data-theme-opt="lakedistrict">
+          <div class="theme-dot" style="background:#3d4f6b;"></div> Lake District
+        </button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -2062,6 +2086,40 @@
 
 
 <script>
+// Theme system
+function setTheme(theme) {
+  const root = document.documentElement;
+  if (theme === 'default') {
+    root.removeAttribute('data-theme');
+  } else {
+    root.setAttribute('data-theme', theme);
+  }
+  localStorage.setItem('england2026-theme', theme);
+  // Update active state
+  document.querySelectorAll('[data-theme-opt]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeOpt === theme);
+  });
+  // Close picker
+  document.getElementById('theme-picker').classList.remove('open');
+}
+
+function toggleThemePicker() {
+  document.getElementById('theme-picker').classList.toggle('open');
+}
+
+// Close picker when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.theme-btn') && !e.target.closest('.theme-picker')) {
+    document.getElementById('theme-picker').classList.remove('open');
+  }
+});
+
+// Load saved theme on page load
+(function() {
+  const saved = localStorage.getItem('england2026-theme') || 'default';
+  setTheme(saved);
+})();
+
 function toggleLondonMap(btn) {
   const embed = document.getElementById('london-map-embed');
   const visible = embed.style.display !== 'none';
