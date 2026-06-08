@@ -1279,7 +1279,7 @@
 </nav>
 
 <!-- CREW -->
-<section id="crew" class="fade-in">
+<section id="crew">
   <p class="section-label">Who's coming</p>
   <h2 class="section-title">The <em>Crew</em></h2>
   <div class="crew-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
@@ -1318,7 +1318,7 @@
 <hr class="divider">
 
 <!-- ITINERARY -->
-<section id="itinerary" class="fade-in">
+<section id="itinerary">
   <p class="section-label">Day by day</p>
   <h2 class="section-title">The <em>Plan</em></h2>
   <p style="color:var(--text-mid); margin-bottom:8px; font-size:14px;">🚐 Rental van: Mon 24 Aug (Luton pickup) → Thu 27 Aug (London return by noon) &nbsp;·&nbsp; 🏙️ London: Thu 27 Aug afternoon → Mon 31 Aug</p>
@@ -1774,7 +1774,7 @@
 <hr class="divider">
 
 <!-- CONSIDERING -->
-<section id="considering" class="fade-in">
+<section id="considering">
   <p class="section-label">On the radar</p>
   <h2 class="section-title">Things We're <em>Considering</em></h2>
   <p style="color:var(--text-mid); font-size:14px; margin-bottom:28px;">Links and ideas we're thinking about — not booked yet, just saving for later.</p>
@@ -2103,7 +2103,7 @@
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   const sections = document.querySelectorAll('section[id], div[id]');
