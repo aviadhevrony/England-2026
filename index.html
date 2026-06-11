@@ -376,6 +376,25 @@
   .wx-loading { color: var(--green-pale); opacity: 0.5; font-size: 13px; padding-top: 20px; }
   .wx-error { color: var(--gold-light); font-size: 12px; opacity: 0.7; }
 
+  /* CONSIDER PLACE ROWS */
+  .consider-place {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(26,58,42,0.04);
+    border: 1px solid var(--cream-dark);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .consider-place:hover { background: rgba(74,140,92,0.08); border-color: var(--green-light); }
+  .consider-place-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .consider-place-body { flex: 1; font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+  .consider-place-body strong { color: var(--green-deep); }
+  .consider-place-map { font-size: 14px; flex-shrink: 0; opacity: 0.5; }
+
   /* CONSIDERING CARDS */
   .consider-card {
     display: flex;
@@ -813,6 +832,25 @@
     .carousel-slide img { height: 380px; }
   }
 
+  /* CONSIDER PLACE ROWS */
+  .consider-place {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(26,58,42,0.04);
+    border: 1px solid var(--cream-dark);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .consider-place:hover { background: rgba(74,140,92,0.08); border-color: var(--green-light); }
+  .consider-place-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .consider-place-body { flex: 1; font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+  .consider-place-body strong { color: var(--green-deep); }
+  .consider-place-map { font-size: 14px; flex-shrink: 0; opacity: 0.5; }
+
   /* CONSIDERING CARDS */
   .consider-card {
     display: flex;
@@ -1159,6 +1197,25 @@
   @media (min-width: 1024px) {
     .carousel-slide img { height: 380px; }
   }
+
+  /* CONSIDER PLACE ROWS */
+  .consider-place {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(26,58,42,0.04);
+    border: 1px solid var(--cream-dark);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .consider-place:hover { background: rgba(74,140,92,0.08); border-color: var(--green-light); }
+  .consider-place-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .consider-place-body { flex: 1; font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+  .consider-place-body strong { color: var(--green-deep); }
+  .consider-place-map { font-size: 14px; flex-shrink: 0; opacity: 0.5; }
 
   /* CONSIDERING CARDS */
   .consider-card {
@@ -1848,6 +1905,49 @@
       </div>
       <div class="consider-arrow">↗</div>
     </a>
+
+    <!-- London Landmarks -->
+    <div class="consider-card" style="flex-direction:column; cursor:default;">
+      <div style="display:flex; align-items:flex-start; gap:16px; width:100%;">
+        <div class="consider-icon">🏛️</div>
+        <div class="consider-body">
+          <div class="consider-title">London Places to Visit</div>
+          <div class="consider-desc">Landmarks and attractions around London — all worth building into the days.</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px; width:100%;">
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=Buckingham+Palace+London" target="_blank">
+          <span class="consider-place-icon">👑</span>
+          <span class="consider-place-body"><strong>Buckingham Palace</strong> — Official residence of the King. Changing of the Guard at 11am. St James's Park right next door.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=Tower+of+London" target="_blank">
+          <span class="consider-place-icon">🗼</span>
+          <span class="consider-place-body"><strong>Tower of London</strong> — Crown Jewels, Yeoman Warder tours. Already in the plan for Friday 28 Aug.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=Westminster+Abbey+London" target="_blank">
+          <span class="consider-place-icon">🏛️</span>
+          <span class="consider-place-body"><strong>Westminster & Big Ben</strong> — Houses of Parliament, Big Ben, Westminster Bridge, Westminster Abbey. Boat to Greenwich leaves from here.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=Hyde+Park+London" target="_blank">
+          <span class="consider-place-icon">🌳</span>
+          <span class="consider-place-body"><strong>Hyde Park</strong> — Serpentine Lake, Speaker's Corner, Diana Memorial. In the Saturday plan.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=Horse+Guards+Parade+London" target="_blank">
+          <span class="consider-place-icon">🐎</span>
+          <span class="consider-place-body"><strong>Horse Guards Parade</strong> — Household Cavalry daily parade. Changing of the Guard 11am (Mon–Sat) · 10am (Sun). Free to watch.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=British+Library+London" target="_blank">
+          <span class="consider-place-icon">📚</span>
+          <span class="consider-place-body"><strong>British Library</strong> — 170M+ items, stunning building near King's Cross. Magna Carta on display. Free entry to public areas.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+      </div>
+    </div>
 
     <!-- London Attractions Map -->
     <div class="consider-card" style="flex-direction:column; gap:0; cursor:default;">
