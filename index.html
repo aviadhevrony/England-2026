@@ -1643,19 +1643,34 @@
     <div class="day-info">
       <div class="day-date">Saturday · 29 August</div>
       <div class="day-title">London — Day 3 🖼️</div>
-      <div class="day-sub">Museum TBD · Hyde Park · Havdala 20:46</div>
+      <div class="day-sub">Belsize Square Synagogue · Primrose Hill · Museum TBD · Hyde Park</div>
     </div>
   </div>
   <div class="timeline fade-in">
     <div class="tl-item highlight">
-      <div class="tl-time">Morning</div>
-      <div class="tl-title">🏛️ Museum — TBD</div>
-      <div class="tl-desc">A London museum to be decided. Options: Natural History Museum, British Museum, Victoria &amp; Albert, Science Museum — all free entry.</div>
+      <div class="tl-time">09:00</div>
+      <div class="tl-title">🕍 Belsize Square Synagogue — Shabbat Morning Service <a href="https://www.google.com/maps/search/?api=1&query=51+Belsize+Square+London+NW3+4HX" target="_blank" style="color:var(--green-light); font-size:11px;">📍 Map ↗</a></div>
+      <div class="tl-desc">Independent synagogue founded in 1939 by German-Jewish refugees. Beautiful dignified services, mainly in Hebrew, with renowned choral music. Men and women sit together. <a href="https://synagogue.org.uk" target="_blank" style="color:var(--green-light)">synagogue.org.uk ↗</a><br><small style="color:var(--text-light);">51 Belsize Square, NW3 4HX · Tube: Belsize Park (Northern line)</small></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">Late morning</div>
+      <div class="tl-title">🌿 Explore Belsize Park Village</div>
+      <div class="tl-desc">Charming neighbourhood with independent cafés, boutiques and restaurants on Haverstock Hill and England's Lane. Very leafy, relaxed, affluent — great for a Shabbat stroll and lunch.</div>
+    </div>
+    <div class="tl-item highlight">
+      <div class="tl-time">Afternoon</div>
+      <div class="tl-title">🌄 Primrose Hill <a href="https://www.google.com/maps/search/?api=1&query=Primrose+Hill+London" target="_blank" style="color:var(--green-light); font-size:11px;">📍 Map ↗</a></div>
+      <div class="tl-desc">One of London's best views — panoramic skyline from the hilltop, from the Shard to Canary Wharf to the City. Only 5 min walk from Belsize Park. The charming village streets below (Regent's Park Road) are full of boutiques and great cafés.</div>
     </div>
     <div class="tl-item">
       <div class="tl-time">Afternoon</div>
+      <div class="tl-title">🏛️ Museum — TBD</div>
+      <div class="tl-desc">A London museum to decide. Options: Natural History Museum <a href="https://www.google.com/maps/search/?api=1&query=Natural+History+Museum+London" target="_blank" style="color:var(--green-light); font-size:11px;">📍</a>, British Museum <a href="https://www.google.com/maps/search/?api=1&query=British+Museum+London" target="_blank" style="color:var(--green-light); font-size:11px;">📍</a>, V&amp;A <a href="https://www.google.com/maps/search/?api=1&query=Victoria+and+Albert+Museum+London" target="_blank" style="color:var(--green-light); font-size:11px;">📍</a> — all free entry.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">Late afternoon</div>
       <div class="tl-title">🌳 Hyde Park <a href="https://www.google.com/maps/search/?api=1&query=Hyde+Park+London" target="_blank" style="color:var(--green-light); font-size:11px;">📍 Map ↗</a></div>
-      <div class="tl-desc">Relax and recharge in London's most famous park. Rent a pedalo on the Serpentine, grab an ice cream, or just find a bench and enjoy the afternoon.</div>
+      <div class="tl-desc">Relax before Havdala — pedalo on the Serpentine, ice cream, or just a bench in the sun.</div>
     </div>
     <div class="tl-item highlight">
       <div class="tl-time">20:46</div>
@@ -2126,6 +2141,33 @@
     });
 
     map.fitBounds(bounds, { top: 60, bottom: 60, left: 40, right: 40 });
+
+    // Extra marker: Belsize Square Synagogue
+    const shulMarker = new google.maps.Marker({
+      position: { lat: 51.5472, lng: -0.1703 },
+      map,
+      title: '🕍 Belsize Square Synagogue',
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 10,
+        fillColor: '#c9a84c',
+        fillOpacity: 1,
+        strokeColor: '#fff',
+        strokeWeight: 2.5,
+      },
+      label: { text: '✡', color: '#fff', fontSize: '11px' },
+      zIndex: 20,
+    });
+    shulMarker.addListener('click', () => {
+      infoWindow.setContent(`
+        <div style="font-family:'DM Sans',sans-serif; padding:4px 2px; min-width:180px;">
+          <div style="font-size:16px; font-weight:600; color:#1a3a2a; margin-bottom:3px;">🕍 Belsize Square Synagogue</div>
+          <div style="font-size:11px; color:#4a8c5c; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Sat 29 Aug · Shabbat Service</div>
+          <div style="font-size:13px; color:#555; line-height:1.5;">51 Belsize Square, NW3 4HX<br>Independent · Founded 1939</div>
+        </div>
+      `);
+      infoWindow.open(map, shulMarker);
+    });
   }
 </script>
 <script async defer
