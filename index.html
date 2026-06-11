@@ -1308,6 +1308,7 @@
     <div class="legend-item"><div class="legend-dot" style="background:#4a8c5c"></div> Lake District</div>
     <div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div> Yorkshire</div>
     <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div> London</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c0392b; opacity:0.85;"></div> Landmarks</div>
     <div class="legend-item"><div style="width:32px; border-top: 3px solid #4a8c5c;"></div> Driving</div>
     <div class="legend-item"><div style="width:32px; border-top: 2.5px dashed #1a5fa8;"></div> ✈️ Flight</div>
     <div class="legend-item"><div style="width:14px;height:14px;background:rgba(74,140,92,0.2);border:2px solid #4a8c5c;border-radius:3px;"></div> Lake District NP</div>
@@ -2167,6 +2168,42 @@
         </div>
       `);
       infoWindow.open(map, shulMarker);
+    });
+
+    // London landmarks to visit
+    const landmarks = [
+      { lat: 51.5014, lng: -0.1419, icon: '👑', label: 'Buckingham Palace', desc: 'Official residence of the King. Watch the Changing of the Guard (usually 11am). St James's Park is right next door.' },
+      { lat: 51.5081, lng: -0.0759, icon: '🗼', label: 'Tower of London', desc: 'Already in the plan for Fri 28 Aug — Yeoman Warder guided tour. Home of the Crown Jewels.' },
+      { lat: 51.4994, lng: -0.1273, icon: '🏛️', label: 'Westminster & Big Ben', desc: 'Houses of Parliament, Big Ben, Westminster Bridge. Take the boat from here to Greenwich. Westminster Abbey nearby.' },
+      { lat: 51.5073, lng: -0.1657, icon: '🌳', label: 'Hyde Park', desc: 'London's most famous park — already in Saturday plan. Serpentine Lake, Speaker's Corner, Diana Memorial.' },
+      { lat: 51.5024, lng: -0.1283, icon: '🐎', label: 'Horse Guards Parade', desc: 'The Household Cavalry Mounted Regiment parades here daily. Changing of the Guard at 11am (Mon–Sat), 10am (Sun). Free to watch.' },
+    ];
+
+    landmarks.forEach(lm => {
+      const mk = new google.maps.Marker({
+        position: { lat: lm.lat, lng: lm.lng },
+        map,
+        title: lm.label,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 9,
+          fillColor: '#c0392b',
+          fillOpacity: 0.85,
+          strokeColor: '#fff',
+          strokeWeight: 2,
+        },
+        label: { text: lm.icon, fontSize: '12px' },
+        zIndex: 15,
+      });
+      mk.addListener('click', () => {
+        infoWindow.setContent(`
+          <div style="font-family:'DM Sans',sans-serif; padding:4px 2px; min-width:190px;">
+            <div style="font-size:16px; font-weight:600; color:#1a3a2a; margin-bottom:6px;">${lm.icon} ${lm.label}</div>
+            <div style="font-size:13px; color:#555; line-height:1.5;">${lm.desc}</div>
+          </div>
+        `);
+        infoWindow.open(map, mk);
+      });
     });
   }
 </script>
