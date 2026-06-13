@@ -1944,6 +1944,16 @@
           <span class="consider-place-body"><strong>Westminster Abbey</strong> — Coronation church of British monarchs since 1066. Poets Corner, Royal Tombs. Right next to the Houses of Parliament. Entry fee applies.</span>
           <span class="consider-place-map">📍</span>
         </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=Westminster+Synagogue+Kent+House+Knightsbridge" target="_blank">
+          <span class="consider-place-icon">✡️</span>
+          <span class="consider-place-body"><strong>Westminster Synagogue</strong> — Independent Progressive synagogue, Kent House, Knightsbridge — directly opposite Hyde Park (~0.7km).</span>
+          <span class="consider-place-map">📍</span>
+        </a>
+        <a class="consider-place" href="https://www.google.com/maps/search/?api=1&query=West+London+Synagogue+Upper+Berkeley+Street" target="_blank">
+          <span class="consider-place-icon">✡️</span>
+          <span class="consider-place-body"><strong>West London Synagogue</strong> — Reform synagogue near Marble Arch, founded 1840, Grade II listed — ~0.9km from Hyde Park.</span>
+          <span class="consider-place-map">📍</span>
+        </a>
       </div>
     </div>
 
@@ -2279,6 +2289,40 @@
           <div style="font-family:'DM Sans',sans-serif; padding:4px 2px; min-width:190px;">
             <div style="font-size:16px; font-weight:600; color:#1a3a2a; margin-bottom:6px;">${lm.icon} ${lm.label}</div>
             <div style="font-size:13px; color:#555; line-height:1.5;">${lm.desc}</div>
+          </div>
+        `);
+        infoWindow.open(map, mk);
+      });
+    });
+
+    // Synagogues near Hyde Park / Marble Arch (within ~1km of landmarks)
+    const synagogues = [
+      { lat: 51.5013, lng: -0.1666, label: "Westminster Synagogue", desc: "Independent Progressive synagogue at Kent House, Knightsbridge. Opposite Hyde Park, 500 yards from the Albert Hall. Houses the Memorial Scrolls Trust." },
+      { lat: 51.5153, lng: -0.1621, label: "West London Synagogue", desc: "Reform synagogue near Marble Arch, founded 1840. Grade II listed Byzantine Revival building, capacity 1000." },
+    ];
+
+    synagogues.forEach(syn => {
+      const mk = new google.maps.Marker({
+        position: { lat: syn.lat, lng: syn.lng },
+        map,
+        title: syn.label,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 10,
+          fillColor: '#c9a84c',
+          fillOpacity: 1,
+          strokeColor: '#fff',
+          strokeWeight: 2.5,
+        },
+        label: { text: "\u2721", color: '#fff', fontSize: '11px' },
+        zIndex: 20,
+      });
+      mk.addListener('click', () => {
+        infoWindow.setContent(`
+          <div style="font-family:'DM Sans',sans-serif; padding:4px 2px; min-width:190px;">
+            <div style="font-size:16px; font-weight:600; color:#1a3a2a; margin-bottom:3px;">\u2721\uFE0F ${syn.label}</div>
+            <div style="font-size:11px; color:#c9a84c; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Near Hyde Park</div>
+            <div style="font-size:13px; color:#555; line-height:1.5;">${syn.desc}</div>
           </div>
         `);
         infoWindow.open(map, mk);
