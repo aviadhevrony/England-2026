@@ -1363,7 +1363,6 @@
   <div class="map-legend">
     <div class="legend-item"><div class="legend-dot" style="background:#1a3a2a"></div> Airports</div>
     <div class="legend-item"><div class="legend-dot" style="background:#4a8c5c"></div> Lake District</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div> Yorkshire</div>
     <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div> London</div>
     <div class="legend-item"><div class="legend-dot" style="background:#c0392b; opacity:0.85;"></div> Landmarks</div>
     <div class="legend-item"><div style="width:32px; border-top: 3px solid #4a8c5c;"></div> Driving</div>
@@ -1483,7 +1482,7 @@
         <div class="res-card-icon">🏨</div>
         <div>
           <div class="res-card-title">The Berry Boutique</div>
-          <div class="res-card-subtitle">Bowness-on-Windermere · 2 nights</div>
+          <div class="res-card-subtitle">Bowness-on-Windermere · 3 nights</div>
         </div>
         <div class="res-card-conf">Ref: 6813616868</div>
       </div>
@@ -1494,7 +1493,7 @@
         </div>
         <div class="res-card-field">
           <div class="res-card-label">Check-out</div>
-          <div class="res-card-value">Wed 26 Aug · by 10:00<small>2 nights · 5 adults</small></div>
+          <div class="res-card-value">Thu 27 Aug · by 10:00<small>⚠️ Updated from 2→3 nights — re-confirm with hotel</small></div>
         </div>
         <div class="res-card-field">
           <div class="res-card-label">Rooms</div>
@@ -1544,28 +1543,22 @@
     <div class="day-number">3</div>
     <div class="day-info">
       <div class="day-date">Wednesday · 26 August</div>
-      <div class="day-title">Yorkshire Moors 🌾 🚐</div>
-      <div class="day-sub">Last night with the van · Lake District → Yorkshire Moors (~1.5 hrs)</div>
+      <div class="day-title">Lake District 🏔️</div>
+      <div class="day-sub">Extra day in the Lakes — third night at The Berry Boutique</div>
     </div>
   </div>
   <div class="timeline fade-in">
-    <div class="tl-item">
-      <div class="tl-time">Morning</div>
-      <div class="tl-title">Drive east to Yorkshire</div>
-      <div class="tl-desc">Head east from the Lakes into Yorkshire. The Moors are bleak and rugged — very different landscape to the Lakes.</div>
-    </div>
     <div class="tl-item highlight">
-      <div class="tl-time">En route</div>
-      <div class="tl-title">York — optional stop</div>
-      <div class="tl-desc">Caroline says York isn't a must-see, but if the route works, worth a brief stop. Don't go out of your way for it.</div>
+      <div class="tl-time">Morning</div>
+      <div class="tl-title">Explore more of the Lakes</div>
+      <div class="tl-desc">More time to enjoy the Lake District — another hike, a boat trip, or revisit a favourite spot from earlier in the trip.</div>
     </div>
     <div class="tl-item highlight">
       <div class="tl-time">Afternoon</div>
-      <div class="tl-title">Walking the Moors</div>
-      <div class="tl-desc">Dramatic open moorland — rugged, wild, and beautiful. Lovely villages scattered throughout.</div>
+      <div class="tl-title">Scenic drive or relaxed afternoon</div>
+      <div class="tl-desc"><a href="https://www.google.com/maps/search/?api=1&query=Kirkstone+Pass+Lake+District" target="_blank" style="color:var(--green-light)">Kirkstone Pass</a> or <a href="https://www.google.com/maps/search/?api=1&query=Honister+Pass+Lake+District" target="_blank" style="color:var(--green-light)">Honister Pass</a> — dramatic even from the van. Or just relax around Windermere for the afternoon.</div>
     </div>
   </div>
-  <div class="coming-soon fade-in"><strong>Hotel to be added</strong> — Yorkshire, 1 night (Wed)</div>
 
   <!-- DAY 4 -->
   <div class="day-header fade-in">
@@ -1573,14 +1566,14 @@
     <div class="day-info">
       <div class="day-date">Thursday · 27 August</div>
       <div class="day-title">Drive to London 🚐 → 🏙️ 🎭</div>
-      <div class="day-sub">Return van by noon · London afternoon · The Lion King evening</div>
+      <div class="day-sub">Drive to Milton Keynes · return van by 17:00 · London evening · The Lion King</div>
     </div>
   </div>
   <div class="timeline fade-in">
     <div class="tl-item highlight">
       <div class="tl-time">Early morning</div>
-      <div class="tl-title">Drive south — Yorkshire → Milton Keynes (~2 hrs)</div>
-      <div class="tl-desc">Leave Yorkshire early to make it to Milton Keynes comfortably before noon.</div>
+      <div class="tl-title">Drive south — Lake District → Milton Keynes (~3.5 hrs)</div>
+      <div class="tl-desc">Check out from The Berry Boutique and head south down the M6, then M1 towards Milton Keynes.</div>
     </div>
     <div class="tl-item highlight">
       <div class="tl-time">By 17:00</div>
@@ -2060,9 +2053,8 @@
     const stops = [
       { lat: 31.9965, lng: 34.8922, label: '✈️ Ben Gurion Airport', color: '#1a3a2a', day: 'Day 1 · 24 Aug — 04:50', desc: 'Depart LY311 at 04:50 from Terminal 3.', legToNext: 'flight' },
       { lat: 51.8763, lng: -0.3717, label: '✈️ Luton Airport',      color: '#1a3a2a', day: 'Day 1 · 24 Aug — 08:15', desc: 'Arrive LY311 at 08:15. Pick up 7-seater SUV.', legToNext: 'drive' },
-      { lat: 54.3633, lng: -2.9201, label: '🏔️ Windermere · The Berry Boutique',      color: '#4a8c5c', day: 'Days 1–3 · 24–26 Aug', desc: 'Hikes, lakes, and dramatic fells. Based near Windermere / Ambleside.', legToNext: 'drive' },
-      { lat: 54.3781, lng: -0.9222, label: '🌾 Yorkshire Moors',    color: '#c9a84c', day: 'Day 3 · Wed 26 Aug', desc: 'Rugged moorland, dramatic open landscapes and lovely villages.', legToNext: 'drive' },
-      { lat: 51.5074, lng: -0.1278, label: '🏙️ London',             color: '#c0392b', day: 'Days 7–8 · 30–31 Aug', desc: 'Two nights in London. Sightseeing, culture, and dinner.', legToNext: 'drive' },
+      { lat: 54.3633, lng: -2.9201, label: '🏔️ Windermere · The Berry Boutique',      color: '#4a8c5c', day: 'Days 1–4 · 24–27 Aug', desc: 'Three nights based near Windermere / Ambleside. Hikes, lakes, and dramatic fells.', legToNext: 'drive' },
+      { lat: 51.5074, lng: -0.1278, label: '🏙️ London',             color: '#c0392b', day: 'Days 4–8 · 27–31 Aug', desc: 'Four nights in London. Sightseeing, culture, shows, and shopping.', legToNext: 'drive' },
       { lat: 51.4700, lng: -0.4543, label: '✈️ Heathrow Airport',   color: '#1a3a2a', day: 'Day 8 · 31 Aug — 22:10', desc: 'Depart LY318 at 22:10 from Terminal 4.', legToNext: 'flight' },
       { lat: 31.9965, lng: 34.8922, label: '✈️ Ben Gurion Airport', color: '#1a3a2a', day: 'Day 9 · 1 Sep — 05:05', desc: 'Arrive LY318 at 05:05. Welcome home! 🏠', legToNext: null },
     ];
@@ -2177,26 +2169,6 @@
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#4a8c5c',
-      fillOpacity: 0.12,
-      map: map
-    });
-
-    // Yorkshire Moors polygon
-    const yorkshireMoorsCoords = [
-      {lat:54.5300,lng:-0.6500},{lat:54.5400,lng:-0.4800},{lat:54.5100,lng:-0.3200},
-      {lat:54.4700,lng:-0.2000},{lat:54.4200,lng:-0.1500},{lat:54.3500,lng:-0.2000},
-      {lat:54.2900,lng:-0.2800},{lat:54.2300,lng:-0.4000},{lat:54.2100,lng:-0.6000},
-      {lat:54.2200,lng:-0.8200},{lat:54.2500,lng:-1.0000},{lat:54.2900,lng:-1.1500},
-      {lat:54.3500,lng:-1.2500},{lat:54.4200,lng:-1.2800},{lat:54.4900,lng:-1.2000},
-      {lat:54.5200,lng:-1.0000},{lat:54.5400,lng:-0.8000},{lat:54.5300,lng:-0.6500}
-    ];
-
-    const yorkshireMoorsPolygon = new google.maps.Polygon({
-      paths: yorkshireMoorsCoords,
-      strokeColor: '#c9a84c',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#c9a84c',
       fillOpacity: 0.12,
       map: map
     });
